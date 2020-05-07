@@ -57,6 +57,6 @@ require("./shema-boti");
 require("./shema-napovedi");
 require("./shema-podjetja");
 require("./shema-skrbniki");
-require("./shema-super-uproabniki");
+require("./shema-super-uporabniki");
 require("./shema-uporabniki");
 require("./shema-zgodovinski-podatki");

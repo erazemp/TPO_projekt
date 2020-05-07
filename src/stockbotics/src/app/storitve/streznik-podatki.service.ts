@@ -19,4 +19,12 @@ export class StreznikPodatkiService {
       .then(odgovor => odgovor);
   }
 
+  public vrniNapovedi(): Promise<any> {
+    const url: string = `${this.apiUrl}/napovedi`;
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(napovedi => napovedi);
+  }
+
 }

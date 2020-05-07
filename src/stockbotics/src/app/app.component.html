@@ -18,4 +18,11 @@
   </li>
 </ul>
 <h1>Odgovor is strežnika: {{odgovor}}</h1>
+<button (click)="getNapovedi()">Prikazi napovedi</button>
+<h1>Napoved:</h1>
+<ul>
+  <li *ngFor="let napoved of napovedi">
+    High: {{napoved.high}}, Low: {{napoved.low}}
+  </li>
+</ul>
 
