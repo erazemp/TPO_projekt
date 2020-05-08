@@ -59,4 +59,5 @@ process.on('SIGTERM', () => {
 //require("./shema-skrbniki");
 //require("./shema-super-uporabniki");
 require("./shema-uporabniki");
+require("./shema-napovedi");
 //require("./shema-zgodovinski-podatki");

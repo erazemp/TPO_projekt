@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var ctrlNapovedi = require('../contollers/napovedi');
+var ctrlNapovedi = require('../controllers/napovedi');
+var ctrlAvtentikacija = require('../controllers/avtentikacija');
 
 /* Izpiši sporocilo o zahtevi po domaci strani */
 router.get('/hello-world', function (req, res) {
@@ -10,5 +11,7 @@ router.get('/hello-world', function (req, res) {
 });
 
 router.get('/napovedi', ctrlNapovedi.vrniNapovedi);
+
+router.post('/registracija', ctrlAvtentikacija.registracija);
 
 module.exports = router;
