@@ -1,3 +1,8 @@
+## Status delovnih tokov
+
+![](https://github.com/tpo-2019-2020/LP4-14/workflows/Neprekinjena%20integracija/badge.svg)
+
+
 # Lastni projekt pri predmetu TPO
 
 Vsaka skupina, ki je sestavljena iz 4 članov, mora razviti lastni projekt (LP) na izbrani problemski domeni, in sicer od **predloga projekta** do **implementacije**, kjer je podrobna razdelitev naslednja:
