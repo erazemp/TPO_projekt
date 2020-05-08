@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var TrgovalniBot = require('./shema-boti.js');
+//var TrgovalniBot = require('./shema-boti.js');
 
 const uporabnikiShema = new mongoose.Schema({
     ocena: {type: Number, required: true},
@@ -9,7 +9,7 @@ const uporabnikiShema = new mongoose.Schema({
     email: {type: String, required: true},
     ime: {type: String, required: true},
     priimek: {type: String, required: true},
-    seznamBotov: [{ type:mongoose.Schema.Types.ObjectId, ref: 'TrgovalniBot'}]
+    //seznamBotov: [{ type:mongoose.Schema.Types.ObjectId, ref: 'TrgovalniBot'}]
 });
 
 mongoose.model('Uporabnik', uporabnikiShema, 'Uporabniki');
