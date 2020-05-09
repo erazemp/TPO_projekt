@@ -8,13 +8,17 @@ import {FormsModule} from "@angular/forms";
 import { OgrodjeComponent } from './komponente/ogrodje/ogrodje.component';
 import { AppUsmerjanjeModule } from './moduli/app-usmerjanje/app-usmerjanje.module';
 import { PrijavaComponent } from './komponente/prijava/prijava.component';
+import { FooterComponent } from './komponente/footer/footer.component';
+import { DomacaStranComponent } from './komponente/domaca-stran/domaca-stran.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistracijaComponent,
     OgrodjeComponent,
-    PrijavaComponent
+    PrijavaComponent,
+    FooterComponent,
+    DomacaStranComponent
   ],
   imports: [
     BrowserModule,

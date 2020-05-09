@@ -19,3 +19,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.footer_area {
+  flex-shrink: 0;
+  background-color: rgba(211,211,211,0.3);
+}
