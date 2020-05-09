@@ -3,13 +3,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StreznikPodatkiService {
 
-  private apiUrl = "http://localhost:3000/api";
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
   }

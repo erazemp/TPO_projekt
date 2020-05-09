@@ -9,11 +9,11 @@ var bodyParser = require("body-parser");
 var passport = require('passport');
 
 
-require('./models/db');
-require('./konfiguracija/passport');
+require('./app_server/models/db');
+require('./app_server/konfiguracija/passport');
 
 
-var apiRouter = require('./routes/index');
+var apiRouter = require('./app_server/routes');
 
 var app = express();
 
@@ -24,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'stockbotics', 'build')));
 // app.use('/', indexRouter);
 
 app.use(passport.initialize());
@@ -36,6 +37,10 @@ app.use('/api', (req, res, next) => {
 });
 
 app.use('/api', apiRouter);
+
+app.get(/(\/prijava)|(\/registracija)|(\/profil)/, (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'stockbotics', 'build', 'index.html'));
+});
 
 
 // catch 404 and forward to error handler
