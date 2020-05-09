@@ -14,4 +14,6 @@ router.get('/napovedi', ctrlNapovedi.vrniNapovedi);
 
 router.post('/registracija', ctrlAvtentikacija.registracija);
 
+router.post('/prijava', ctrlAvtentikacija.prijava);
+
 module.exports = router;

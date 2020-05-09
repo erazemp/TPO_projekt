@@ -48,4 +48,8 @@ export class StreznikPodatkiService {
       .then(rezultat => rezultat as RezultatAvtentikacije)
       .catch(this.obdelajNapako);
   }
+
+  public prijava(uporabnik: any): Promise<RezultatAvtentikacije> {
+    return this.avtentikacija('prijava', uporabnik);
+  }
 }

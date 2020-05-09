@@ -7,12 +7,14 @@ import { RegistracijaComponent } from './komponente/registracija/registracija.co
 import {FormsModule} from "@angular/forms";
 import { OgrodjeComponent } from './komponente/ogrodje/ogrodje.component';
 import { AppUsmerjanjeModule } from './moduli/app-usmerjanje/app-usmerjanje.module';
+import { PrijavaComponent } from './komponente/prijava/prijava.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistracijaComponent,
-    OgrodjeComponent
+    OgrodjeComponent,
+    PrijavaComponent
   ],
   imports: [
     BrowserModule,

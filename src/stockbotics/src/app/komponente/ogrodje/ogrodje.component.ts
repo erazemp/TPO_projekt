@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AvtentikacijaService} from '../../storitve/avtentikacija.service';
+import {Uporabnik} from '../../razredi/uporabnik';
 
 @Component({
   selector: 'app-ogrodje',
@@ -7,8 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OgrodjeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private avtentikacijaService: AvtentikacijaService) { }
 
+  public odjava(): void {
+    this.avtentikacijaService.odjava();
+  }
+
+  public jePrijavljen(): boolean {
+    return this.avtentikacijaService.jePrijavljen();
+  }
+
+  public vrniUporabnika(): string {
+    const uporabnik: Uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
+    return uporabnik ? uporabnik.uporabniskoIme : 'Gost';
+  }
   ngOnInit() {
   }
 

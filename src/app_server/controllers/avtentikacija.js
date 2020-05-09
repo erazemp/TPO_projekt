@@ -1,4 +1,4 @@
-//const passport = require('passport');
+const passport = require('passport');
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
 
@@ -28,6 +28,29 @@ const registracija = (req, res) => {
     });
 };
 
+const prijava = (req, res) => {
+    if (!req.body.email || !req.body.geslo) {
+        return res.status(400).json({"sporočilo": "Zahtevani so vsi podatki"});
+    }
+    console.log(req.body.email);
+    console.log(req.body.geslo);
+
+    passport.authenticate('local', (napaka, uporabnik, informacije) => {
+        console.log("EPEPEPPEEPPEP");
+        if (napaka){
+            console.log("NAPAKA");
+            return res.status(500).json(napaka);
+        }
+        if (uporabnik) {
+            res.status(200).json({"žeton": uporabnik.generirajJwt()});
+        } else {
+            res.status(401).json(informacije);
+        }
+    })(req, res);
+};
+
+
 module.exports = {
-    registracija
+    registracija,
+    prijava
 };
