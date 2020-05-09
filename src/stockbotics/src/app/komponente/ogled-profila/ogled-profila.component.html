@@ -1,0 +1,16 @@
+<div *ngIf="uporabnik" class="row">
+  <div class="col-xl-12 col-lg-12 col-md-12">
+    <div class="gap-100"></div>
+    <h1 class="text-white">Podatki o profilu</h1>
+    <h3 class="text-white text-center">Ime: {{uporabnik.ime }}</h3>
+    <h3 class="text-white text-center">Priimek: {{uporabnik.priimek }}</h3>
+    <h3 class="text-white text-center">Uporabniško ime: {{uporabnik.uporabniskoIme}}</h3>
+    <h3 class="text-white text-center">Elektronski naslov: {{uporabnik.email}}</h3>
+  </div>
+</div>
+
+
+
+<div *ngIf="!uporabnik">
+  <h3 class="bg-warning text-white text-center">Pridobivanje podatkov uporabnika...</h3>
+</div>
