@@ -3,6 +3,7 @@ export class Uporabnik {
   uporabniskoIme:string;
   ocena: string;
   denar: number;
+  datumPrijave: Date;
   geslo: string;
   email: string;
   ime: string;

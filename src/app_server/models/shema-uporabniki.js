@@ -8,6 +8,7 @@ const uporabnikiShema = new mongoose.Schema({
     denar: {type: Number, required: false},
     uporabniskoIme: {type: String, required: true},
     geslo: String,
+    datumPrijave: Date,
     email: {type: String, required: true},
     ime: {type: String, required: true},
     priimek: {type: String, required: true},

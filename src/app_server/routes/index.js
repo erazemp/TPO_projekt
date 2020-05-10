@@ -25,6 +25,8 @@ router.route('/uporabniki/:idUporabnika')
     .get(ctrlApiUporabniki.pridobiUporabnika)
     .put(ctrlApiUporabniki.posodobiUporabnika);
 
+//router.put('/datum/:idUporabnika', ctrlApiUporabniki.posodobiDatumPrijave);
+
 
 
 router.get('/uporabniki', ctrlUporabniki.vrniUporabnike);

@@ -32,7 +32,21 @@ var posodobiUporabnika = function(req,res){
         }
     });
 };
-
+/*
+var posodobiDatumPrijave = function(req,res){
+    var id = req.params.idUporabnika;
+    var posodobljenUporabnik = {
+        datumPrijave:req.body.datum,
+    };
+    Uporabnik.findByIdAndUpdate(id,posodobljenUporabnik,function(err,el){
+        if(err){
+            res.status(400).json({'sporočilo':'Napaka z odgovorom: '+err});
+        }else{
+            res.status(200).json(el);
+        }
+    });
+};
+*/
 
 const vrniUporabnike = (req, res) => {
     Uporabnik.find({}, function(err, uporabniki) {
@@ -58,5 +72,9 @@ module.exports = {
     vrniUporabnike,
     pridobiUporabnika,
     posodobiUporabnika,
+<<<<<<< Updated upstream
     izbrisiUporabnika
+=======
+    //posodobiDatumPrijave
+>>>>>>> Stashed changes
 };

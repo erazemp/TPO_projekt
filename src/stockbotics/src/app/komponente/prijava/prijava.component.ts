@@ -16,7 +16,6 @@ export class PrijavaComponent implements OnInit {
     geslo: ''
   };
 
-
   public submitedPrijava = false;
   public napakaPriPrijavi = '';
 
@@ -36,6 +35,7 @@ export class PrijavaComponent implements OnInit {
       //log uporabnika
       console.log(this.prijavljenUporabnik);
       this.avtentikacijaService.prijava(this.prijavljenUporabnik).then(() => {
+        //this.avtentikacijaService.posodobiDatumPrijave();
         this.router.navigateByUrl('/'); } ).catch(sporocilo => {this.napakaPriPrijavi = 'Napačno geslo!'; } );
     }
   }

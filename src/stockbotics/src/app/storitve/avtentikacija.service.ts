@@ -70,10 +70,17 @@ export class AvtentikacijaService {
       return false;
     }
   }
-
-
-
-
+  /*
+  public posodobiDatumPrijave(): void {
+    if (this.jePrijavljen()) {
+      const zeton: string = this.vrniZeton();
+      const {_id, uporabniskoIme, email, ime, priimek} = JSON.parse(this.b64Utf8(zeton.split('.')[1]));
+      var pridobljen_id = _id;
+      var datumPrijave = new Date();
+      this.streznikPodatkiStoritev.posodobiDatumPrijave(pridobljen_id, datumPrijave);
+    }
+  }
+  */
   public  vrniTrenutnegaUporabnika(): Uporabnik {
     if (this.jePrijavljen()) {
       const zeton: string = this.vrniZeton();

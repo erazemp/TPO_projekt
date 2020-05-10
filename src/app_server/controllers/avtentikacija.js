@@ -14,6 +14,7 @@ const registracija = (req, res) => {
     uporabnik.uporabniskoIme = req.body.uporabniskoIme;
     uporabnik.ocena = req.body.ocena;
     uporabnik.denar = req.body.denar;
+    uporabnik.datumPrijave = req.body.datumPrijave;
     uporabnik.nastaviGeslo(req.body.geslo);
 
     uporabnik.save(function(napaka) {

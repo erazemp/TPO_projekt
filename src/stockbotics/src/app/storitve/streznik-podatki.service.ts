@@ -70,8 +70,17 @@ export class StreznikPodatkiService {
       .then(odgovor => odgovor as Uporabnik)
       .catch(this.obdelajNapako);
   }
-
-
+  /*
+  public posodobiDatumPrijave(idUporabnika: string, datum: any): Promise<any> {
+    const url: string = `${this.apiUrl}/datum/${idUporabnika}`;
+    console.log(datum);
+    return this.http
+      .put(url, datum)
+      .toPromise()
+      .then(odgovor => odgovor as any)
+      .catch(this.obdelajNapako);
+  }
+  */
   public posodobiProfil(idUporabnika: string, podatkiObrazca: any): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}`;
     console.log(podatkiObrazca);

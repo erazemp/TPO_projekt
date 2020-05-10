@@ -18,7 +18,8 @@ export class RegistracijaComponent implements OnInit {
     geslo: '',
     email: '',
     ime: '',
-    priimek: ''
+    priimek: '',
+    datumPrijave: new Date()
   };
 
   public submited = false;
