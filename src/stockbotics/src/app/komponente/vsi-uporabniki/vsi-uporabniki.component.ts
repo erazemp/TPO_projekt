@@ -3,6 +3,7 @@ import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {Uporabnik} from "../../razredi/uporabnik";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {switchMap} from "rxjs/operators";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-vsi-uporabniki',
@@ -13,7 +14,9 @@ export class VsiUporabnikiComponent implements OnInit {
   uporabniki: Uporabnik[];
 
   constructor(private streznikPodatki: StreznikPodatkiService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private title: Title) {
+    title.setTitle("Vsi uporabniki");
   }
 
   public getVsiUporabniki(): void {

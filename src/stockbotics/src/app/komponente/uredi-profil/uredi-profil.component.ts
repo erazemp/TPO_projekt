@@ -3,6 +3,7 @@ import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Uporabnik} from "../../razredi/uporabnik";
 import {switchMap} from "rxjs/operators";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-uredi-profil',
@@ -11,7 +12,10 @@ import {switchMap} from "rxjs/operators";
 })
 export class UrediProfilComponent implements OnInit {
 
-  constructor(private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router) { }
+  constructor(private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router,
+              private title: Title) {
+    title.setTitle("Uredi profil");
+  }
 
   public uporabnik: Uporabnik;
   public  submited = false;

@@ -72,9 +72,6 @@ module.exports = {
     vrniUporabnike,
     pridobiUporabnika,
     posodobiUporabnika,
-<<<<<<< Updated upstream
     izbrisiUporabnika
-=======
     //posodobiDatumPrijave
->>>>>>> Stashed changes
 };

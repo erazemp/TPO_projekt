@@ -1,16 +1,8 @@
 var assert = require('assert');
 const { exec } = require("child_process");
-//const { describe, it, after, before } = require("mocha");
-const { Builder, By, until } = require("selenium-webdriver");
+const { Builder, By, Key, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const expect = require("chai").expect;
-
-// enostavni test
-describe('Enostavni test', function () {
-    it('preveri, ali je 1 + 1 = 2', function () {
-        assert.equal(1 + 1, 2);
-    });
-});
 
 /**
  * URL naslovi
@@ -30,7 +22,7 @@ process.on("unhandledRejection", (napaka) => {
 /**
  * Funkcionalni testi
  */
-(async function EduGeoCache() { //morda z veliko
+(async function Stockbotics() { //morda z veliko
     let brskalnik, jwtZeton;
 
     let pocakajStranNalozena = async (brskalnik, casVS, xpath) => {
@@ -69,9 +61,9 @@ process.on("unhandledRejection", (napaka) => {
             });
             it("pojdi na registracijo", async function() {
                 await pocakajStranNalozena(brskalnik, 5,
-                    "//a[contains(text(), 'Nimate računa? Registrirajte se!')]");
+                    "//button[contains(text(), 'Nimate računa? Registrirajte se!')]");
                 let povezava = await brskalnik.findElement(
-                    By.xpath("//a[contains(text(), 'Nimate računa? Registrirajte se!')]"));
+                    By.xpath("//button[contains(text(), 'Nimate računa? Registrirajte se!')]"));
                 await expect(povezava).to.not.be.empty;
                 await povezava.click();
             });
@@ -110,11 +102,26 @@ process.on("unhandledRejection", (napaka) => {
                 });
 
                 it("preveri ali je uporabnik registriran", async function() {
-                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj Profil')]");
+                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj profil')]");
                     let uporabnik = await brskalnik.findElement(
-                        By.xpath("//strong[contains(text(), 'Moj Profil')]"));
+                        By.xpath("//strong[contains(text(), 'Moj profil')]"));
                     await expect(uporabnik).to.not.be.empty;
                 });
+
+                it("odjavi upoarabnika", async function() {
+                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj profil')]");
+                    let povezava = await brskalnik.findElement(
+                        By.xpath("//strong[contains(text(), 'Moj profil')]"));
+                    await expect(povezava).to.not.be.empty;
+                    await povezava.click();
+
+                    let povezava1 = await brskalnik.findElement(
+                        By.xpath("//a[contains(text(), 'Odjava')]"));
+                    await expect(povezava1).to.not.be.empty;
+                    await povezava1.click();
+                });
+
+
             });
         });
         //izjemni tok
@@ -132,9 +139,9 @@ process.on("unhandledRejection", (napaka) => {
             });
             it("pojdi na registracijo izjemni", async function() {
                 await pocakajStranNalozena(brskalnik, 5,
-                    "//a[contains(text(), 'Nimate računa? Registrirajte se!')]");
+                    "//button[contains(text(), 'Nimate računa? Registrirajte se!')]");
                 let povezava = await brskalnik.findElement(
-                    By.xpath("//a[contains(text(), 'Nimate računa? Registrirajte se!')]"));
+                    By.xpath("//button[contains(text(), 'Nimate računa? Registrirajte se!')]"));
                 await expect(povezava).to.not.be.empty;
                 await povezava.click();
             });
@@ -173,10 +180,10 @@ process.on("unhandledRejection", (napaka) => {
                 });
 
                 it("preveri ali registracija ni uspela", async function() {
-                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj Profil')]");
+                    await pocakajStranNalozena(brskalnik, 5, "//a[contains(text(), 'Prijava')]");
                     let uporabnik = await brskalnik.findElement(
-                        By.xpath("//strong[contains(text(), 'Moj Profil')]"));
-                    await expect(uporabnik).to.be.empty;
+                        By.xpath("//a[contains(text(), 'Prijava')]"));
+                    await expect(uporabnik).to.not.be.empty;
                 });
             });
         });
@@ -208,17 +215,30 @@ process.on("unhandledRejection", (napaka) => {
 
                     let geslo = await brskalnik.findElement(By.css("input[name='geslo']"));
                     await expect(geslo).to.not.be.empty;
-                    uporabniskoIme.sendKeys("12345678");
+                    geslo.sendKeys("12345678");
 
                     brskalnik.findElement(
                         By.xpath("//button[contains(text(), 'Prijava')]")).click();
                 });
 
                 it("preveri ali je uporabnik prijavljen", async function() {
-                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj Profil')]");
+                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj profil')]");
                     let uporabnik = await brskalnik.findElement(
-                        By.xpath("//strong[contains(text(), 'Moj Profil')]"));
+                        By.xpath("//strong[contains(text(), 'Moj profil')]"));
                     await expect(uporabnik).to.not.be.empty;
+                });
+
+                it("odjavi upoarabnika", async function() {
+                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj profil')]");
+                    let povezava = await brskalnik.findElement(
+                        By.xpath("//strong[contains(text(), 'Moj profil')]"));
+                    await expect(povezava).to.not.be.empty;
+                    await povezava.click();
+
+                    let povezava1 = await brskalnik.findElement(
+                        By.xpath("//a[contains(text(), 'Odjava')]"));
+                    await expect(povezava1).to.not.be.empty;
+                    await povezava1.click();
                 });
             });
         });
@@ -227,8 +247,8 @@ process.on("unhandledRejection", (napaka) => {
             this.timeout(30000);
             before(async function() { await brskalnik.get(aplikacijaUrl); });
 
-            context("Prijava uporabnika 2", async function() {
-                it("prijava 2", async function() {
+            context("Prijava uporabnika izjemni tok", async function() {
+                it("prijava izjemni tok", async function() {
                     await pocakajStranNalozena(brskalnik, 5,
                         "//a[contains(text(), 'Prijava')]");
                     let povezava = await brskalnik.findElement(
@@ -237,8 +257,8 @@ process.on("unhandledRejection", (napaka) => {
                     await povezava.click();
                 });
             });
-            context("Prijava 2", async function() {
-                it("Prijavi se 2", async function() {
+            context("Prijava izjemni tok", async function() {
+                it("Prijavi se izjemni tok", async function() {
                     await pocakajStranNalozena(brskalnik, 5,
                         "//button[contains(text(), 'Prijava')]");
                     let email = await brskalnik.findElement(By.css("input[name='email']"));
@@ -247,18 +267,90 @@ process.on("unhandledRejection", (napaka) => {
 
                     let geslo = await brskalnik.findElement(By.css("input[name='geslo']"));
                     await expect(geslo).to.not.be.empty;
-                    uporabniskoIme.sendKeys("12345678910");
+                    geslo.sendKeys("12345678910");
 
                     brskalnik.findElement(
                         By.xpath("//button[contains(text(), 'Prijava')]")).click();
                 });
 
                 it("preveri ali je prijava neuspesna", async function() {
-                    await pocakajStranNalozena(brskalnik, 5, "//[contains(text(), 'Napačno geslo!')]");
+                    await pocakajStranNalozena(brskalnik, 5, "//div[contains(text(), 'Napačno geslo!')]");
                     let prijavaGumb = await brskalnik.findElement(
-                        By.xpath("//strong[contains(text(), 'Prijava')]"));
+                        By.xpath("//button[contains(text(), 'Prijava')]"));
                     await expect(prijavaGumb).to.not.be.empty;
                 });
+            });
+        });
+
+        // uredi profil
+        describe("Uredi profil trenutno prijavljenega uporabnika", async function() {
+            this.timeout(30000);
+            before(async function() { await brskalnik.get(aplikacijaUrl); });
+
+            context("Prijava uporabnika", async function() {
+                it("prijava", async function() {
+                    await pocakajStranNalozena(brskalnik, 5,
+                        "//a[contains(text(), 'Prijava')]");
+                    let povezava = await brskalnik.findElement(
+                        By.xpath("//a[contains(text(), 'Prijava')]"));
+                    await expect(povezava).to.not.be.empty;
+                    await povezava.click();
+                });
+            });
+            context("Prijava", async function() {
+                it("Prijavi se", async function() {
+                    await pocakajStranNalozena(brskalnik, 5,
+                        "//button[contains(text(), 'Prijava')]");
+                    let email = await brskalnik.findElement(By.css("input[name='email']"));
+                    await expect(email).to.not.be.empty;
+                    email.sendKeys("aljaz.smaljcelj@gmail.com");
+
+                    let geslo = await brskalnik.findElement(By.css("input[name='geslo']"));
+                    await expect(geslo).to.not.be.empty;
+                    geslo.sendKeys("12345678");
+
+                    brskalnik.findElement(
+                        By.xpath("//button[contains(text(), 'Prijava')]")).click();
+                });
+
+                it("odpri profil uporabnika", async function() {
+                    await pocakajStranNalozena(brskalnik, 5, "//strong[contains(text(), 'Moj profil')]");
+                    let povezava = await brskalnik.findElement(
+                        By.xpath("//strong[contains(text(), 'Moj profil')]"));
+                    await expect(povezava).to.not.be.empty;
+                    await povezava.click();
+
+                    let povezava1 = await brskalnik.findElement(
+                        By.xpath("//a[contains(text(), 'Ogled profila')]"));
+                    await expect(povezava1).to.not.be.empty;
+                    await povezava1.click();
+                });
+
+                it("uredi profil uporabnika", async function() {
+                    await pocakajStranNalozena(brskalnik, 5, "//button[contains(text(), 'Uredi profil')]");
+                    let povezava = await brskalnik.findElement(
+                        By.xpath("//button[contains(text(), 'Uredi profil')]"));
+                    await expect(povezava).to.not.be.empty;
+                    await povezava.click();
+
+                    let uporabniskoIme = await brskalnik.findElement(By.css("input[name='naslov']"));
+                    await expect(uporabniskoIme).to.not.be.empty;
+                    uporabniskoIme.sendKeys(Key.CONTROL + "a");
+                    uporabniskoIme.sendKeys(Key.DELETE);
+                    uporabniskoIme.sendKeys("YAYEET");
+
+                    let povezava1 = await brskalnik.findElement(
+                        By.xpath("//button[contains(text(), 'Shrani Spremembe')]"));
+                    await expect(povezava1).to.not.be.empty;
+                    await povezava1.click();
+                });
+
+                it("preveri veljavnost spremembe", async function() {
+                    await pocakajStranNalozena(brskalnik, 5, "//h3[contains(text(), 'YAYEET')]");
+                    let novoUporabniskoIme = await brskalnik.findElement(
+                        By.xpath("//h3[contains(text(), 'YAYEET')]"));
+                    await expect(novoUporabniskoIme).to.not.be.empty;
+                })
             });
         });
 

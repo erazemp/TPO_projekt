@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AvtentikacijaService} from '../../storitve/avtentikacija.service';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-prijava',
@@ -9,7 +10,9 @@ import {AvtentikacijaService} from '../../storitve/avtentikacija.service';
 })
 export class PrijavaComponent implements OnInit {
 
-  constructor(private avtentikacijaService: AvtentikacijaService, private router: Router) { }
+  constructor(private avtentikacijaService: AvtentikacijaService, private router: Router, private title: Title) {
+    title.setTitle("Prijava");
+  }
 
   public prijavljenUporabnik = {
     email: '',

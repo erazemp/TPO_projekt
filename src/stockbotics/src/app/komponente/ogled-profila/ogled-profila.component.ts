@@ -3,6 +3,7 @@ import {Uporabnik} from '../../razredi/uporabnik';
 import {AvtentikacijaService} from '../../storitve/avtentikacija.service';
 import {switchMap} from "rxjs/operators";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {SHRAMBA_BRSKALNIKA} from "../../razredi/shramba";
@@ -17,7 +18,9 @@ export class OgledProfilaComponent implements OnInit {
 
   public uporabnik : Uporabnik;
   constructor(private avtentikacijaService: AvtentikacijaService, private pot: ActivatedRoute, private router: Router,
-              private streznikPodatkiStoritev: StreznikPodatkiService) { }
+              private streznikPodatkiStoritev: StreznikPodatkiService, private title: Title) {
+    title.setTitle("Ogled profila");
+  }
 
   public vrniUporabnika() {
 

@@ -8,8 +8,13 @@ import {OgledProfilaComponent} from "../../komponente/ogled-profila/ogled-profil
 import {UrediProfilComponent} from "../../komponente/uredi-profil/uredi-profil.component";
 import {VsiUporabnikiComponent} from "../../komponente/vsi-uporabniki/vsi-uporabniki.component";
 import {DbComponent} from "../../komponente/db/db.component";
+import {DomacaStranComponent} from "../../komponente/domaca-stran/domaca-stran.component";
 
 const poti: Routes = [
+  {
+    path: '',
+    component: DomacaStranComponent
+  },
   {
     path: 'registracija',
     component: RegistracijaComponent
