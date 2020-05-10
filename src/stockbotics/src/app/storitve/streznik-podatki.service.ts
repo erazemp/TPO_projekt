@@ -53,4 +53,11 @@ export class StreznikPodatkiService {
   public prijava(uporabnik: any): Promise<RezultatAvtentikacije> {
     return this.avtentikacija('prijava', uporabnik);
   }
+
+  public vrniVseUporabnike(): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki`;
+    return this.http
+      .get(url)
+      .toPromise();
+  }
 }

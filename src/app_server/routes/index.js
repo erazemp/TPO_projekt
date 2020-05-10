@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ctrlNapovedi = require('../controllers/napovedi');
 var ctrlAvtentikacija = require('../controllers/avtentikacija');
+var ctrlUporabniki = require('../controllers/uporabniki');
 
 /* Izpiši sporocilo o zahtevi po domaci strani */
 router.get('/hello-world', function (req, res) {
@@ -15,5 +16,7 @@ router.get('/napovedi', ctrlNapovedi.vrniNapovedi);
 router.post('/registracija', ctrlAvtentikacija.registracija);
 
 router.post('/prijava', ctrlAvtentikacija.prijava);
+
+router.get('/uporabniki', ctrlUporabniki.vrniUporabnike);
 
 module.exports = router;
