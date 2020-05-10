@@ -1,4 +1,5 @@
 export class Uporabnik {
+  _id: string;
   uporabniskoIme:string;
   ocena: string;
   denar: number;
