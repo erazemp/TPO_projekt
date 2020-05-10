@@ -14,6 +14,7 @@ import { DomacaStranComponent } from './komponente/domaca-stran/domaca-stran.com
 import { UrediProfilComponent } from './komponente/uredi-profil/uredi-profil.component';
 import { PodrobnostiUporabnikaComponent } from './komponente/podrobnosti-uporabnika/podrobnosti-uporabnika.component';
 import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabniki.component';
+import { DbComponent } from './komponente/db/db.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabni
     DomacaStranComponent,
     UrediProfilComponent,
     PodrobnostiUporabnikaComponent,
-    VsiUporabnikiComponent
+    VsiUporabnikiComponent,
+    DbComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {Uporabnik} from "../../razredi/uporabnik";
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-vsi-uporabniki',
@@ -10,13 +12,19 @@ import {Uporabnik} from "../../razredi/uporabnik";
 export class VsiUporabnikiComponent implements OnInit {
   uporabniki: Uporabnik[];
 
-  constructor(private streznikPodatki: StreznikPodatkiService) {
+  constructor(private streznikPodatki: StreznikPodatkiService,
+              private route: ActivatedRoute) {
   }
 
   public getVsiUporabniki(): void {
-    this.streznikPodatki
-      .vrniVseUporabnike()
-      .then(uporabniki => this.uporabniki = uporabniki);
+    this.route.paramMap
+      .pipe(
+        switchMap((params:ParamMap) => {
+          return this.streznikPodatki.vrniVseUporabnike();
+        })
+      ).subscribe(najdeniUporabniki => {
+        this.uporabniki = najdeniUporabniki;
+    })
   }
 
   ngOnInit() {

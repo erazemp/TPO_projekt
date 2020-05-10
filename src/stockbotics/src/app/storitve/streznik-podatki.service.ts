@@ -15,6 +15,14 @@ export class StreznikPodatkiService {
   constructor(private http: HttpClient) {
   }
 
+  // private returnHeader(): any {
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Authorization'
+  //     })
+  //   }
+  // }
+
   public helloWorld(): Promise<any> {
     const url: string = `${this.apiUrl}/hello-world`;
     return this.http
@@ -78,6 +86,21 @@ export class StreznikPodatkiService {
     const url: string = `${this.apiUrl}/uporabniki`;
     return this.http
       .get(url)
+      .toPromise();
+  }
+
+  public izbrisiUporabnika(idUporabnika: string): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}`;
+    return this.http
+      .delete(url)
+      .toPromise()
+      .then(odgovor => odgovor as any);
+  }
+
+  public vstaviDb(): Promise<any> {
+    const url: string = `${this.apiUrl}/db/vstavi`;
+    return this.http
+      .post(url, null)
       .toPromise();
   }
 }

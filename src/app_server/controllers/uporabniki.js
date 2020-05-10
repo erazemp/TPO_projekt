@@ -44,8 +44,19 @@ const vrniUporabnike = (req, res) => {
     })
 };
 
+const izbrisiUporabnika = (req, res) => {
+    Uporabnik.findByIdAndDelete(req.params.idUporabnika)
+        .exec((napaka) => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+            return res.status(204).json(null);
+        });
+};
+
 module.exports = {
     vrniUporabnike,
     pridobiUporabnika,
-    posodobiUporabnika
+    posodobiUporabnika,
+    izbrisiUporabnika
 };

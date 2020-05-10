@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Uporabnik} from "../../razredi/uporabnik";
+import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
+import {VsiUporabnikiComponent} from "../vsi-uporabniki/vsi-uporabniki.component";
 
 @Component({
   selector: 'app-podrobnosti-uporabnika',
@@ -10,10 +12,12 @@ export class PodrobnostiUporabnikaComponent implements OnInit {
 
   @Input() uporabnik: Uporabnik;
 
-  constructor() { }
+  constructor(private streznikPodatki: StreznikPodatkiService,
+              private vsiUporabniki: VsiUporabnikiComponent) { }
 
   public izbrisiUporabnika(): void {
-
+    this.streznikPodatki.izbrisiUporabnika(this.uporabnik._id);
+    this.vsiUporabniki.getVsiUporabniki();
   }
 
   ngOnInit() {
