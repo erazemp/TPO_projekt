@@ -23,7 +23,7 @@
         </div>
         <div *ngIf="napakaPriPrijavi" class="alert alert-danger">{{napakaPriPrijavi}}</div>
       </form>
-      <a href="#" id="forgot_pass">Dont have an account? Register now.</a>
+      <button class="astext" (click)="router.navigate(['registracija'])">Nimate računa? Registrirajte se!</button>
     </div>
   </div>
 </div>
