@@ -19,12 +19,12 @@ const uporabnikiShema = new mongoose.Schema({
 uporabnikiShema.methods.nastaviGeslo = function(geslo) {
     this.nakljucnaVrednost = crypto.randomBytes(16).toString('hex');
     this.zgoscenaVrednost = crypto.pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512').toString('hex');
-}
+};
 
 uporabnikiShema.methods.preveriGeslo = function(geslo) {
     var zgoscenaVrednost = crypto.pbkdf2Sync(geslo, this.nakljucnaVrednost, 1000, 64, 'sha512').toString('hex');
     return this.zgoscenaVrednost == zgoscenaVrednost;
-}
+};
 
 uporabnikiShema.methods.generirajJwt = function() {
     const datumPoteka = new Date();
@@ -41,6 +41,7 @@ uporabnikiShema.methods.generirajJwt = function() {
 
         datumPoteka: parseInt(datumPoteka.getTime() / 1000, 10)
     }, "tpobad");
-}
+};
 
-mongoose.model('Uporabnik', uporabnikiShema, 'Uporabniki');
+
+module.exports = mongoose.model('Uporabnik', uporabnikiShema, 'Uporabniki');

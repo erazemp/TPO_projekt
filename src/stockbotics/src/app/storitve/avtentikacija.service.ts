@@ -3,6 +3,7 @@ import { SHRAMBA_BRSKALNIKA } from '../razredi/shramba';
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { StreznikPodatkiService } from './streznik-podatki.service';
+import {promise} from "selenium-webdriver";
 
 @Injectable({
   providedIn: 'root'
@@ -70,12 +71,26 @@ export class AvtentikacijaService {
     }
   }
 
-  public vrniTrenutnegaUporabnika(): Uporabnik {
+
+
+
+  public  vrniTrenutnegaUporabnika(): Uporabnik {
     if (this.jePrijavljen()) {
       const zeton: string = this.vrniZeton();
-      const { uporabniskoIme, email, ime, priimek } = JSON.parse(this.b64Utf8(zeton.split('.')[1]));
-      // console.log(JSON.parse(this.b64Utf8(zeton.split('.')[1])))
-      return { uporabniskoIme, email, ime, priimek } as Uporabnik;
+      const { _id, uporabniskoIme, email, ime, priimek } = JSON.parse(this.b64Utf8(zeton.split('.')[1]));
+      var pridobljen_id = _id;
+      console.log("Pridobi id iz zetona: "+pridobljen_id);
+      //return this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Uporabnik;
+      // var uporabnik: Uporabnik;
+      // uporabnik = this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id);
+
+      return { _id, uporabniskoIme, email, ime, priimek } as Uporabnik;
+
+      //return this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Promise<Uporabnik>
+      // let uporabnik = this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Promise<Uporabnik>;
+      // uporabnik.then(uporabnik => {return uporabnik});
+      // return null;
+
     }
   }
 

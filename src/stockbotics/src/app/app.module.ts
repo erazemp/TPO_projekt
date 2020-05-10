@@ -11,6 +11,7 @@ import { PrijavaComponent } from './komponente/prijava/prijava.component';
 import { OgledProfilaComponent } from './komponente/ogled-profila/ogled-profila.component';
 import { FooterComponent } from './komponente/footer/footer.component';
 import { DomacaStranComponent } from './komponente/domaca-stran/domaca-stran.component';
+import { UrediProfilComponent } from './komponente/uredi-profil/uredi-profil.component';
 import { PodrobnostiUporabnikaComponent } from './komponente/podrobnosti-uporabnika/podrobnosti-uporabnika.component';
 import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabniki.component';
 
@@ -23,6 +24,7 @@ import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabni
     PrijavaComponent,
     FooterComponent,
     DomacaStranComponent,
+    UrediProfilComponent,
     PodrobnostiUporabnikaComponent,
     VsiUporabnikiComponent
   ],

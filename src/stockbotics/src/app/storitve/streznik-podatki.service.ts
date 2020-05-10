@@ -54,6 +54,26 @@ export class StreznikPodatkiService {
     return this.avtentikacija('prijava', uporabnik);
   }
 
+  public pridobiUporabnika(id: string): Promise<Uporabnik>{
+    const url: string = `${this.apiUrl}/uporabniki/${id}`;
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(odgovor => odgovor as Uporabnik)
+      .catch(this.obdelajNapako);
+  }
+
+
+  public posodobiProfil(idUporabnika: string, podatkiObrazca: any): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}`;
+    console.log(podatkiObrazca);
+    return this.http
+      .put(url, podatkiObrazca)
+      .toPromise()
+      .then(odgovor => odgovor as any)
+      .catch(this.obdelajNapako);
+  }
+
   public vrniVseUporabnike(): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki`;
     return this.http

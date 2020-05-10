@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegistracijaComponent } from '../../komponente/registracija/registracija.component';
 import {PrijavaComponent} from "../../komponente/prijava/prijava.component";
 import {OgledProfilaComponent} from "../../komponente/ogled-profila/ogled-profila.component";
+import {UrediProfilComponent} from "../../komponente/uredi-profil/uredi-profil.component";
 import {VsiUporabnikiComponent} from "../../komponente/vsi-uporabniki/vsi-uporabniki.component";
 
 const poti: Routes = [
@@ -17,6 +18,9 @@ const poti: Routes = [
   }, {
     path: 'profil',
     component: OgledProfilaComponent
+  }, {
+    path: 'profil/:idUporabnika',
+    component: UrediProfilComponent
   }, {
     path: 'uporabniki',
     component: VsiUporabnikiComponent

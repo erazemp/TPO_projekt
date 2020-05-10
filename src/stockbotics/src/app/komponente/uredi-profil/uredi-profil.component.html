@@ -1,0 +1,49 @@
+<div *ngIf="uporabnik">
+   <!-- form -->
+  <div class="row">
+
+    <div class="col-md-12 col-12">
+      <form (ngSubmit)="urediProfil()">
+        <div id="form1">
+          <div id="form">
+            <div class="form-group">
+              <h2 id="naslovUrejanjeDogodka">Urejanje Profila</h2>
+              <label for="uporabniskoIme">Spremeni Uporabniško ime:</label>
+              <input id="uporabniskoIme" [(ngModel)]="editUporabnik.uporabniskoIme" value="{{uporabnik.uporabniskoIme}}" name="naslov" type="text" class="form-control" placeholder="Uporabnisko ime">
+              <div *ngIf="submited">
+                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="text-danger">Prosim vnesite uporabnisko ime!</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="ime">Imena ni mogoče spreminjati!</label>
+              <input type="text" id="ime" name="avtor" value="{{uporabnik.ime}}" class="form-control" rows="1" placeholder="Ime" disabled>
+
+            </div>
+
+            <div class="form-group">
+              <label for="priimek">Priimka ni mogoče spreminjati!</label>
+              <input type="text" id="priimek" name="avtor" value="{{uporabnik.priimek}}" class="form-control" rows="1" placeholder="Priimek" disabled>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Spremeni Email:</label>
+              <input id="email" [(ngModel)]="editUporabnik.email" value="{{uporabnik.email}}" name="email" type="text" class="form-control" placeholder="Email">
+              <div *ngIf="submited">
+                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="text-danger">Prosim vnesite email!</div>
+              </div>
+            </div>
+
+            <br>
+            <button id="shrSprBtn" type="submit" class="btn btn-warning">Shrani Spremembe</button>
+            <!--<button id="pocistiBtn" type="reset" class="btn btn-secondary" value="Reset">Počisti</button> -->
+
+          </div>
+        </div>
+      </form>
+      <div>
+        <button id="nazajBtn" class="btn btn-primary"><a routerLink="profil">Nazaj</a></button>
+      </div>
+    </div>
+  </div>
+</div>
