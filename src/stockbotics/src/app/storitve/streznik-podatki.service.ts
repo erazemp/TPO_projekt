@@ -10,7 +10,7 @@ import { environment } from "../../environments/environment";
 })
 export class StreznikPodatkiService {
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api';
 
   constructor(private http: HttpClient) {
   }

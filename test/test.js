@@ -337,7 +337,7 @@ process.on("unhandledRejection", (napaka) => {
                     await expect(uporabniskoIme).to.not.be.empty;
                     uporabniskoIme.sendKeys(Key.CONTROL + "a");
                     uporabniskoIme.sendKeys(Key.DELETE);
-                    uporabniskoIme.sendKeys("YAYEET");
+                    uporabniskoIme.sendKeys("uporabniskoIme");
 
                     let povezava1 = await brskalnik.findElement(
                         By.xpath("//button[contains(text(), 'Shrani Spremembe')]"));
@@ -346,9 +346,9 @@ process.on("unhandledRejection", (napaka) => {
                 });
 
                 it("preveri veljavnost spremembe", async function() {
-                    await pocakajStranNalozena(brskalnik, 5, "//h3[contains(text(), 'YAYEET')]");
+                    await pocakajStranNalozena(brskalnik, 5, "//h3[contains(text(), 'uporabniskoIme')]");
                     let novoUporabniskoIme = await brskalnik.findElement(
-                        By.xpath("//h3[contains(text(), 'YAYEET')]"));
+                        By.xpath("//h3[contains(text(), 'uporabniskoIme')]"));
                     await expect(novoUporabniskoIme).to.not.be.empty;
                 })
             });
