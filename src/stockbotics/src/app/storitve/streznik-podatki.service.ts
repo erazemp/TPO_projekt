@@ -4,15 +4,18 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { environment } from "../../environments/environment";
+import {TeachingLavbicPodatkiService} from "./teaching-lavbic-podatki.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StreznikPodatkiService {
 
-  private apiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api';
+  // private apiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api';
+  private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private teachingService: TeachingLavbicPodatkiService) {
   }
 
   // private returnHeader(): any {
@@ -111,5 +114,16 @@ export class StreznikPodatkiService {
     return this.http
       .post(url, null)
       .toPromise();
+  }
+
+  public pridobiPodatkeDelnic(apiKlic: boolean): Promise<any> {
+    if (apiKlic) {
+      return this.teachingService.pridobiDelnice()
+        .then(odgovor => {
+
+        });
+    } else {
+
+    }
   }
 }

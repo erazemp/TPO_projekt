@@ -43,6 +43,12 @@ const prijava = (req, res) => {
             return res.status(500).json(napaka);
         }
         if (uporabnik) {
+            uporabnik.datumPrijave = new Date().toISOString();
+            uporabnik.save((napaka, uporabnik) => {
+               if (napaka) {
+                   res.status(404).json(napaka);
+               }
+            });
             res.status(200).json({"žeton": uporabnik.generirajJwt()});
         } else {
             res.status(401).json(informacije);

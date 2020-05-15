@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { Globals } from '../globals';
 
 import { AppComponent } from './app.component';
 import { RegistracijaComponent } from './komponente/registracija/registracija.component';
@@ -36,7 +37,7 @@ import { DbComponent } from './komponente/db/db.component';
     FormsModule,
     AppUsmerjanjeModule
   ],
-  providers: [],
+  providers: [ Globals ],
   bootstrap: [OgrodjeComponent]
 })
 export class AppModule { }

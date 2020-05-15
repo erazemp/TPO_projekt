@@ -11,6 +11,7 @@ import {VsiUporabnikiComponent} from "../vsi-uporabniki/vsi-uporabniki.component
 export class PodrobnostiUporabnikaComponent implements OnInit {
 
   @Input() uporabnik: Uporabnik;
+  datumPrijave: string;
 
   constructor(private streznikPodatki: StreznikPodatkiService,
               private vsiUporabniki: VsiUporabnikiComponent) { }
@@ -21,6 +22,8 @@ export class PodrobnostiUporabnikaComponent implements OnInit {
   }
 
   ngOnInit() {
+    let date = new Date(this.uporabnik.datumPrijave);
+    this.datumPrijave = date.toLocaleDateString('fi-FI');
   }
 
 }
