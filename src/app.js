@@ -10,6 +10,7 @@ var passport = require('passport');
 
 
 require('./app_server/models/db');
+require('./app_server/models/db2');
 require('./app_server/konfiguracija/passport');
 
 

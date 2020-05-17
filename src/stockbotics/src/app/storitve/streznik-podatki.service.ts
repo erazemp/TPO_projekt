@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { environment } from "../../environments/environment";
-import {TeachingLavbicPodatkiService} from "./teaching-lavbic-podatki.service";
+import {Podjetje} from "../razredi/podjetje";
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,7 @@ export class StreznikPodatkiService {
   // private apiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api';
   private apiUrl = 'http://localhost:3000/api';
 
-  constructor(private http: HttpClient,
-              private teachingService: TeachingLavbicPodatkiService) {
+  constructor(private http: HttpClient) {
   }
 
   // private returnHeader(): any {
@@ -65,7 +64,7 @@ export class StreznikPodatkiService {
     return this.avtentikacija('prijava', uporabnik);
   }
 
-  public pridobiUporabnika(id: string): Promise<Uporabnik>{
+  public pridobiUporabnika(id: string): Promise<Uporabnik> {
     const url: string = `${this.apiUrl}/uporabniki/${id}`;
     return this.http
       .get(url)
@@ -73,17 +72,7 @@ export class StreznikPodatkiService {
       .then(odgovor => odgovor as Uporabnik)
       .catch(this.obdelajNapako);
   }
-  /*
-  public posodobiDatumPrijave(idUporabnika: string, datum: any): Promise<any> {
-    const url: string = `${this.apiUrl}/datum/${idUporabnika}`;
-    console.log(datum);
-    return this.http
-      .put(url, datum)
-      .toPromise()
-      .then(odgovor => odgovor as any)
-      .catch(this.obdelajNapako);
-  }
-  */
+
   public posodobiProfil(idUporabnika: string, podatkiObrazca: any): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}`;
     console.log(podatkiObrazca);
@@ -116,14 +105,10 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
-  public pridobiPodatkeDelnic(apiKlic: boolean): Promise<any> {
-    if (apiKlic) {
-      return this.teachingService.pridobiDelnice()
-        .then(odgovor => {
-
-        });
-    } else {
-
-    }
+  public prikaziDomacoStran(): Promise<any> {
+    const url: string = `${this.apiUrl}/domaca-stran`;
+    return this.http
+      .get(url)
+      .toPromise();
   }
 }
