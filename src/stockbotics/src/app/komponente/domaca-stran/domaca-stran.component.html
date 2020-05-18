@@ -2,5 +2,7 @@
   domaca-stran works!... odgovor strežnika:
 </p>
 <div *ngFor="let podjetje of seznamPodjetij">
-  {{podjetje.ime}}
+  <button (click)="pridobiZgodovinskePodatkePodjetja(podjetje)">
+    {{podjetje.ime}}
+  </button>
 </div>

@@ -111,4 +111,11 @@ export class StreznikPodatkiService {
       .get(url)
       .toPromise();
   }
+
+  public prikaziZgodovinskePodatke(simbol: string) {
+    const url: string = `${this.apiUrl}/delnice/${simbol}`;
+    return this.http
+      .get(url)
+      .toPromise();
+  }
 }

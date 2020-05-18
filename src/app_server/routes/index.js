@@ -34,5 +34,6 @@ router.post('/db/vstavi', ctrlDb.vstavi);
 
 // domaca stran
 router.get('/domaca-stran', ctrlDomacaStran.pridobiPodjetjeNaBorzi);
+router.get('/delnice/:simbol', ctrlDomacaStran.pridobiZgodovinskePodatke);
 
 module.exports = router;

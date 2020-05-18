@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import { StreznikPodatkiService } from "../../storitve/streznik-podatki.service";
+import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {Globals} from "../../../globals";
 import {Podjetje} from "../../razredi/podjetje";
 
@@ -23,6 +23,13 @@ export class DomacaStranComponent implements OnInit {
     this.streznikService.prikaziDomacoStran()
       .then(odgovor => {
         this.seznamPodjetij = odgovor;
+      });
+  }
+
+  private pridobiZgodovinskePodatkePodjetja(podjetje: Podjetje): void {
+    this.streznikService.prikaziZgodovinskePodatke(podjetje.simbol)
+      .then(odgovor => {
+        console.log(odgovor);
       });
   }
 

@@ -58,4 +58,3 @@ process.on('SIGTERM', () => {
 require("./shema-podjetja");
 //require("./shema-skrbniki");
 //require("./shema-super-uporabniki");
-//require("./shema-zgodovinski-podatki");
