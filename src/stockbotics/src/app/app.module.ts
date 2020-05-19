@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { Globals } from '../globals';
+import {DatePipe} from "@angular/common";
 
 import { AppComponent } from './app.component';
 import { RegistracijaComponent } from './komponente/registracija/registracija.component';
@@ -37,7 +37,7 @@ import { DbComponent } from './komponente/db/db.component';
     FormsModule,
     AppUsmerjanjeModule
   ],
-  providers: [ Globals ],
+  providers: [ DatePipe ],
   bootstrap: [OgrodjeComponent]
 })
 export class AppModule { }

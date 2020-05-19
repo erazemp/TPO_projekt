@@ -1,8 +1,6 @@
 var request = require('request');
 const teachingLavbicAPIUrl = 'https://teaching.lavbic.net/api';
-
 var Podjetje = require('../models/shema-podjetja');
-
 let datumZadnjeOsvezitveSeznamaDelnic = null;
 
 const pridobiPodjetjeNaBorzi = (req, res) => {
@@ -49,13 +47,6 @@ const apiKlicZaSeznamDelnic = (res) => {
                         };
                         odgovor.push(zapis);
                         Podjetje.create(zapis);
-                        // Podjetje.create({
-                        //     ime: jsonTabela[key].podjetje,
-                        //     simbol: jsonTabela[key].simbol,
-                        //     sektor: jsonTabela[key].sektor,
-                        //     valuta: jsonTabela[key].valuta,
-                        //     datumPosodobitveZgodovinskihPodatkov: null
-                        // });
                     }
                 }
                 res.send(odgovor);
@@ -75,8 +66,14 @@ const pridobiZgodovinskePodatke = (req, res) => {
             }
             const datumSpremembe = new Date(podjetje.datumPosodobitveZgodovinskihPodatkov);
             if (danesDatum.getTime() !== datumSpremembe.getTime()) {
-                // todo: dodaj se datum pri poizvedbi
-                request(teachingLavbicAPIUrl + '/finance/delnice/cene/' + req.params.simbol + '?zacetek=2019-05-19&konec=2019-05-23', function (napaka, odgovor, body) {
+                const options = {
+                    url: teachingLavbicAPIUrl + '/finance/delnice/cene/' + req.params.simbol,
+                    qs: {
+                        zacetek: req.query.zacetek,
+                        konec: req.query.konec
+                    }
+                };
+                request(options, function (napaka, odgovor, body) {
                     console.log('API klic za pridobitev zgodovinskih podatkov delnice ' + req.params.simbol);
                     if (napaka) {
                         return res.status(500).json(napaka);
@@ -86,12 +83,12 @@ const pridobiZgodovinskePodatke = (req, res) => {
                         if (jsonTabela.hasOwnProperty(key)) {
                             podjetje.seznamZgodovinskihPodatkov.push({
                                 datum: jsonTabela[key].date,
-                                open: parseInt(jsonTabela[key].open),
-                                high: parseInt(jsonTabela[key].high),
-                                low: parseInt(jsonTabela[key].low),
-                                close: parseInt(jsonTabela[key].close),
-                                volume: parseInt(jsonTabela[key].volume),
-                                adjusted: parseInt(jsonTabela[key].adjusted)
+                                open: parseFloat(jsonTabela[key].open),
+                                high: parseFloat(jsonTabela[key].high),
+                                low: parseFloat(jsonTabela[key].low),
+                                close: parseFloat(jsonTabela[key].close),
+                                volume: parseFloat(jsonTabela[key].volume),
+                                adjusted: parseFloat(jsonTabela[key].adjusted)
                             });
                         }
                     }
@@ -100,9 +97,17 @@ const pridobiZgodovinskePodatke = (req, res) => {
                     podjetje.save();
                 });
             } else {
-                res.send(podjetje.seznamZgodovinskihPodatkov);
+                var zgodovinskiPodatkiMap = [];
+                for (let zgodovinskiPodatek in podjetje.seznamZgodovinskihPodatkov) {
+                    if (podjetje.seznamZgodovinskihPodatkov.hasOwnProperty(zgodovinskiPodatek)) {
+                        if (zgodovinskiPodatek.datum > req.query.zacetek && zgodovinskiPodatek.datum <= req.query.konec) {
+                            zgodovinskiPodatkiMap.push(zgodovinskiPodatek);
+                        }
+                    }
+                }
+                res.send(zgodovinskiPodatkiMap);
             }
-        });
+        })
 };
 
 module.exports = {

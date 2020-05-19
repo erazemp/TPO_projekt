@@ -4,7 +4,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { environment } from "../../environments/environment";
-import {Podjetje} from "../razredi/podjetje";
 
 @Injectable({
   providedIn: 'root'
@@ -112,8 +111,8 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
-  public prikaziZgodovinskePodatke(simbol: string) {
-    const url: string = `${this.apiUrl}/delnice/${simbol}`;
+  public prikaziZgodovinskePodatke(simbol: string, zacetek: string, konec: string): Promise<any> {
+    const url: string = `${this.apiUrl}/delnice/${simbol}?zacetek=${zacetek}&konec=${konec}`;
     return this.http
       .get(url)
       .toPromise();
