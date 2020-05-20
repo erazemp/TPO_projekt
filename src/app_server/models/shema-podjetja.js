@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const drugaBaza = require('./db2');
 
 const zgodovinskiPodatkiShema = new mongoose.Schema({
     datum: {type:String, required: true},
@@ -19,5 +20,5 @@ const podjetjaShema = new mongoose.Schema({
     seznamZgodovinskihPodatkov: [zgodovinskiPodatkiShema]
 });
 
-mongoose.model('Podjetje', podjetjaShema, 'Podjetja');
-module.exports = mongoose.model('Podjetje', podjetjaShema);
+drugaBaza.model('Podjetje', podjetjaShema, 'Podjetja');
+module.exports = drugaBaza.model('Podjetje', podjetjaShema);

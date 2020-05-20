@@ -104,6 +104,11 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
+  public izbrisiDb(): Promise<any> {
+    const url: string = `${this.apiUrl}/db/izbrisi`;
+    return this.http.delete(url).toPromise();
+  }
+
   public prikaziDomacoStran(): Promise<any> {
     const url: string = `${this.apiUrl}/domaca-stran`;
     return this.http

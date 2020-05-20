@@ -16,8 +16,12 @@ export class DbComponent implements OnInit {
   ngOnInit() {
   }
 
-  public click(): void {
+  public vstaviPodatkeVBazi(): void {
     this.streznikPodatki.vstaviDb();
+  }
+
+  public izbrisiPodatkeIzBaz(): void {
+    this.streznikPodatki.izbrisiDb();
   }
 
 }

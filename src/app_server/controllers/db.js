@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
+const drugaBaza = require('../models/db2');
+var Podjetje = drugaBaza.model('Podjetje');
 
 var vstavi = (req, res) => {
     Uporabnik.find({}).deleteMany({})
@@ -30,10 +32,38 @@ var vstavi = (req, res) => {
                 "geslo": "geslo"
             });
         });
+
+    Podjetje.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+            Podjetje.create({
+                "ime": "test",
+                "simbol": "T",
+                "sektor": "S",
+                "valuta": "Euro",
+                "datumPosodobitveZgodovinskihPodatkov": null
+            });
+        })
 };
 
 var izbrisi = (req, res) => {
-    // todo: izbrisi vse
+    Uporabnik.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+        });
+
+    Podjetje.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+        });
+
+    res.status(200).json({obvestilo: "Uspesen izbris"});
 };
 
 module.exports = {

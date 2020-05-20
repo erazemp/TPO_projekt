@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGODB_CLOUD_URI;
 }
 
-mongoose.connect(dbURI, {
+let povezava = mongoose.createConnection(dbURI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -52,9 +52,6 @@ process.on('SIGTERM', () => {
     });
 });
 
+module.exports = povezava;
 
-//require("./shema-boti");
-//require("./shema-napovedi");
 require("./shema-podjetja");
-//require("./shema-skrbniki");
-//require("./shema-super-uporabniki");
