@@ -14,7 +14,7 @@ const trgovalniBotiShema = new mongoose.Schema({
     pridobljeniDenar: {type: Number, required: true},
     izgubljeniDenar: {type: Number, required: true},
     naprodaj: {type: Boolean, required: true},
-    seznamPodjetij: [{ type:mongoose.Schema.Types.ObjectId, ref: 'Podjetje'}]
+    //seznamPodjetij: [{ type:mongoose.Schema.Types.ObjectId, ref: 'Podjetje'}]
 });
 
 //mongoose.model('TrgovalniBot', trgovalniBotiShema, 'TrgovalniBoti');

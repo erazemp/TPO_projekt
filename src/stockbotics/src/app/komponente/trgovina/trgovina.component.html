@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="trgovinaTabela">
+    <div *ngIf="boti?.length > 0 else elseBlock">
+      <table style="width:70%">
+        <tr>
+          <th>Ime Bota</th>
+          <th>Kreator</th>
+          <th>Cena</th>
+        </tr>
+        <tr *ngFor="let bot of boti">
+          <td>{{bot.ime}} </td>
+          <td>{{bot.kreator}}</td>
+          <td>{{bot.cena}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <ng-template #elseBlock>Ni botov</ng-template>
+</div>
+

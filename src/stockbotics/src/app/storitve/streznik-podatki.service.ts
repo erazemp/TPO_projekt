@@ -97,6 +97,13 @@ export class StreznikPodatkiService {
       .then(odgovor => odgovor as any);
   }
 
+  public vrniVseBote(): Promise<any> {
+    const url: string = `${this.apiUrl}/boti`;
+    return this.http
+      .get(url)
+      .toPromise();
+  }
+
   public vstaviDb(): Promise<any> {
     const url: string = `${this.apiUrl}/db/vstavi`;
     return this.http

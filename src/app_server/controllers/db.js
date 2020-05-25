@@ -53,8 +53,8 @@ var vstavi = (req, res) => {
                 "dobickonosnost": 0,
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
-                "naprodaj": true,
-                "seznamPodjetji": null
+                "naprodaj": true
+                //"seznamPodjetji": null
             });
             Bot.create({
                 "ime": "Bot2",
@@ -69,8 +69,8 @@ var vstavi = (req, res) => {
                 "dobickonosnost": 0,
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
-                "naprodaj": true,
-                "seznamPodjetji": null
+                "naprodaj": true
+                //"seznamPodjetji": null
             });
             Bot.create({
                 "ime": "Bot3",
@@ -85,8 +85,8 @@ var vstavi = (req, res) => {
                 "dobickonosnost": 0,
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
-                "naprodaj": true,
-                "seznamPodjetji": null
+                "naprodaj": true
+                //"seznamPodjetji": null
             });
         });
     res.status(200).json({obvestilo: "Uspešno dodani podatki"});

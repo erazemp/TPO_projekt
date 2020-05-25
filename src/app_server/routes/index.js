@@ -6,6 +6,7 @@ var ctrlAvtentikacija = require('../controllers/avtentikacija');
 var ctrlUporabniki = require('../controllers/uporabniki');
 var ctrlDb = require('../controllers/db');
 var ctrlDomacaStran = require('../controllers/domaca-stran');
+var ctrlBoti = require('../controllers/boti');
 
 /* Izpiši sporocilo o zahtevi po domaci strani */
 router.get('/hello-world', function (req, res) {
@@ -27,6 +28,9 @@ router.route('/uporabniki/:idUporabnika')
     .put(ctrlApiUporabniki.posodobiUporabnika);
 router.get('/uporabniki', ctrlUporabniki.vrniUporabnike);
 router.delete('/uporabniki/:idUporabnika', ctrlUporabniki.izbrisiUporabnika);
+
+// boti
+router.get('/boti', ctrlBoti.vrniBote);
 
 // testni vnos podatkov
 router.delete('/db/izbrisi', ctrlDb.izbrisi);
