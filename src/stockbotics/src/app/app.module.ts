@@ -16,6 +16,7 @@ import { UrediProfilComponent } from './komponente/uredi-profil/uredi-profil.com
 import { PodrobnostiUporabnikaComponent } from './komponente/podrobnosti-uporabnika/podrobnosti-uporabnika.component';
 import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabniki.component';
 import { DbComponent } from './komponente/db/db.component';
+import { LestvicaComponent } from './komponente/lestvica/lestvica.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DbComponent } from './komponente/db/db.component';
     UrediProfilComponent,
     PodrobnostiUporabnikaComponent,
     VsiUporabnikiComponent,
-    DbComponent
+    DbComponent,
+    LestvicaComponent
   ],
   imports: [
     BrowserModule,

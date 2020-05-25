@@ -9,6 +9,7 @@ import {UrediProfilComponent} from "../../komponente/uredi-profil/uredi-profil.c
 import {VsiUporabnikiComponent} from "../../komponente/vsi-uporabniki/vsi-uporabniki.component";
 import {DbComponent} from "../../komponente/db/db.component";
 import {DomacaStranComponent} from "../../komponente/domaca-stran/domaca-stran.component";
+import {LestvicaComponent} from "../../komponente/lestvica/lestvica.component";
 
 const poti: Routes = [
   {
@@ -33,6 +34,9 @@ const poti: Routes = [
   }, {
     path: 'db',
     component: DbComponent
+  }, {
+    path: 'lestvica',
+    component: LestvicaComponent
   }
 ];
 
