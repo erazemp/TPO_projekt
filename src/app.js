@@ -14,11 +14,13 @@ require('./app_server/models/db2');
 require('./app_server/konfiguracija/passport');
 
 
-var apiRouter = require('./app_server/routes');
+var apiRouter = require('./app_server/routes/index');
+var apiRouterNapovedi = require('./app_server/routes/indexNapovedi');
 
 var app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -38,6 +40,7 @@ app.use('/api', (req, res, next) => {
 });
 
 app.use('/api', apiRouter);
+app.use('/api-napovedi', apiRouterNapovedi);
 
 app.get(/(\/prijava)|(\/registracija)|(\/profil)/, (req, res, next) => {
   res.sendFile(path.join(__dirname, 'stockbotics', 'build', 'index.html'));

@@ -6,6 +6,7 @@ var ctrlAvtentikacija = require('../controllers/avtentikacija');
 var ctrlUporabniki = require('../controllers/uporabniki');
 var ctrlDb = require('../controllers/db');
 var ctrlDomacaStran = require('../controllers/domaca-stran');
+var ctrlTrgovanjeBota = require('../controllers/trgovanjeBota');
 var ctrlBoti = require('../controllers/boti');
 
 /* Izpiši sporocilo o zahtevi po domaci strani */
@@ -39,5 +40,8 @@ router.post('/db/vstavi', ctrlDb.vstavi);
 // domaca stran
 router.get('/domaca-stran', ctrlDomacaStran.pridobiPodjetjeNaBorzi);
 router.get('/delnice/:simbol', ctrlDomacaStran.pridobiZgodovinskePodatke);
+
+// trgovanje
+router.get('/trgovanje', ctrlTrgovanjeBota.klicApi);
 
 module.exports = router;
