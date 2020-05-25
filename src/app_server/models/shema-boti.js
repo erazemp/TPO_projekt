@@ -18,5 +18,5 @@ const trgovalniBotiShema = new mongoose.Schema({
     seznamPodjetij: [{ type:mongoose.Schema.Types.ObjectId, ref: 'Podjetje'}]
 });
 
-mongoose.model('TrgovalniBot', trgovalniBotiShema, 'TrgovalniBoti');
-module.exports = mongoose.model('TrgovalniBot', trgovalniBotiShema);
+//mongoose.model('TrgovalniBot', trgovalniBotiShema, 'TrgovalniBoti');
+module.exports = mongoose.model('TrgovalniBot', trgovalniBotiShema, 'TrgovalniBoti');

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
+const Bot = mongoose.model('TrgovalniBot');
 const drugaBaza = require('../models/db2');
 var Podjetje = drugaBaza.model('Podjetje');
 
@@ -32,6 +33,60 @@ var vstavi = (req, res) => {
                 "geslo": "geslo"
             });
         });
+    Bot.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka) {
+                return res.status(500).json({"Napaka": napaka});
+            }
+            Bot.create({
+                "ime": "Bot1",
+                "opis": "Prvi testni bot",
+                "kreator": "Mojster Botov1",
+                "cena": 200,
+                "parameterStevilaDelnic": 3,
+                "parameterInvesticije": 2,
+                "parameterNakupa": 7,
+                "parameterProdaje": 4,
+                "zagnan": false,
+                "dobickonosnost": 0,
+                "pridobljeniDenar": 0,
+                "izgubljeniDenar": 0,
+                "naprodaj": true,
+                "seznamPodjetji": null
+            });
+            Bot.create({
+                "ime": "Bot2",
+                "opis": "Drugi testni bot",
+                "kreator": "Mojster Botov2",
+                "cena": 240,
+                "parameterStevilaDelnic": 1,
+                "parameterInvesticije": 1,
+                "parameterNakupa": 3,
+                "parameterProdaje": 2,
+                "zagnan": false,
+                "dobickonosnost": 0,
+                "pridobljeniDenar": 0,
+                "izgubljeniDenar": 0,
+                "naprodaj": true,
+                "seznamPodjetji": null
+            });
+            Bot.create({
+                "ime": "Bot3",
+                "opis": "Tretji MEGA testni bot",
+                "kreator": "Mojster Botov3",
+                "cena": 340,
+                "parameterStevilaDelnic": 5,
+                "parameterInvesticije": 2,
+                "parameterNakupa": 5,
+                "parameterProdaje": 5,
+                "zagnan": false,
+                "dobickonosnost": 0,
+                "pridobljeniDenar": 0,
+                "izgubljeniDenar": 0,
+                "naprodaj": true,
+                "seznamPodjetji": null
+            });
+        });
 
     Podjetje.find({}).deleteMany({})
         .exec(napaka => {
@@ -57,6 +112,12 @@ var izbrisi = (req, res) => {
         });
 
     Podjetje.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka) {
+                return res.status(500).json(napaka);
+            }
+        });
+    Bot.find({}).deleteMany({})
         .exec(napaka => {
             if (napaka) {
                 return res.status(500).json(napaka);

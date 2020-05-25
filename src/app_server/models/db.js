@@ -53,7 +53,7 @@ process.on('SIGTERM', () => {
 });
 
 
-//require("./shema-boti");
+require("./shema-boti");
 //require("./shema-napovedi");
 //require("./shema-podjetja");
 //require("./shema-skrbniki");
