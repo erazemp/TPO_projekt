@@ -24,7 +24,7 @@ var vstavi = (req, res) => {
             });
             Uporabnik.create({
                 "uporabniskoIme": "lavbo",
-                "ocena": "2",
+                "ocena": "4",
                 "denar": 14,
                 "datumPrijave": new Date(),
                 "email": 'lavbo@gmail.com',
