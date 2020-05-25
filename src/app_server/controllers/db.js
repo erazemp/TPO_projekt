@@ -14,6 +14,7 @@ var vstavi = (req, res) => {
                 "uporabniskoIme": "alko",
                 "ocena": "2",
                 "denar": 14,
+                "datumPrijave": new Date(),
                 "email": 'aljaz@gmail.com',
                 "ime": "Aljaz",
                 "priimek": "Smaljcelj",
@@ -25,6 +26,7 @@ var vstavi = (req, res) => {
                 "uporabniskoIme": "lavbo",
                 "ocena": "2",
                 "denar": 14,
+                "datumPrijave": new Date(),
                 "email": 'lavbo@gmail.com',
                 "ime": "Lavbo",
                 "priimek": "Kralj",
@@ -87,20 +89,7 @@ var vstavi = (req, res) => {
                 "seznamPodjetji": null
             });
         });
-
-    Podjetje.find({}).deleteMany({})
-        .exec(napaka => {
-            if (napaka) {
-                return res.status(500).json(napaka);
-            }
-            Podjetje.create({
-                "ime": "test",
-                "simbol": "T",
-                "sektor": "S",
-                "valuta": "Euro",
-                "datumPosodobitveZgodovinskihPodatkov": null
-            });
-        })
+    res.status(200).json({obvestilo: "Uspešno dodani podatki"});
 };
 
 var izbrisi = (req, res) => {
@@ -111,12 +100,6 @@ var izbrisi = (req, res) => {
             }
         });
 
-    Podjetje.find({}).deleteMany({})
-        .exec(napaka => {
-            if (napaka) {
-                return res.status(500).json(napaka);
-            }
-        });
     Bot.find({}).deleteMany({})
         .exec(napaka => {
             if (napaka) {

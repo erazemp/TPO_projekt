@@ -13,8 +13,8 @@ const uporabnikiShema = new mongoose.Schema({
     ime: {type: String, required: true},
     priimek: {type: String, required: true},
     zgoscenaVrednost: String,
-    nakljucnaVrednost: String
-    //seznamBotov: [{ type:mongoose.Schema.Types.ObjectId, ref: 'TrgovalniBot'}]
+    nakljucnaVrednost: String,
+    seznamBotov: [{ type:mongoose.Schema.Types.ObjectId, ref: 'TrgovalniBot'}]
 });
 
 uporabnikiShema.methods.nastaviGeslo = function(geslo) {

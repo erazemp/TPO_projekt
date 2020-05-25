@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var Podjetje = require('./shema-podjetja.js');
 
 const trgovalniBotiShema = new mongoose.Schema({
     ime: {type: String, required: true},

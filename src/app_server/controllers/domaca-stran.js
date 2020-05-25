@@ -1,6 +1,7 @@
 var request = require('request');
 const teachingLavbicAPIUrl = 'https://teaching.lavbic.net/api';
-var Podjetje = require('../models/shema-podjetja');
+var drugaBaza = require("../models/db2");
+const Podjetje = drugaBaza.model("Podjetje");
 let datumZadnjeOsvezitveSeznamaDelnic = null;
 
 const pridobiPodjetjeNaBorzi = (req, res) => {
@@ -29,11 +30,13 @@ const apiKlicZaSeznamDelnic = (res) => {
     console.log('API klic za seznam delnic');
 
     request(teachingLavbicAPIUrl + '/finance/delnice/seznam', function (napaka, odgovor, body) {
-        Podjetje.find({}).deleteMany({})
+        Podjetje.find({})
             .exec(napakaIzbrisa => {
                 if (napakaIzbrisa) {
                     return res.status(500).json({odgovor: napakaIzbrisa});
                 }
+                const danes = new Date();
+                const danesDatum = new Date(danes.getFullYear(), danes.getMonth(), danes.getDate());
                 var jsonTabela = JSON.parse(body);
                 var odgovor = [];
                 for (let key in jsonTabela) {
@@ -46,7 +49,15 @@ const apiKlicZaSeznamDelnic = (res) => {
                             datumPosodobitveZgodovinskihPodatkov: null
                         };
                         odgovor.push(zapis);
-                        Podjetje.create(zapis);
+                        Podjetje.findOneAndUpdate({"ime": zapis.ime})
+                            .exec((napaka, podjetje) => {
+                                if (!podjetje) {
+                                    Podjetje.create(zapis);
+                                }
+                                podjetje.simbol = zapis.simbol;
+                                podjetje.sektor = zapis.sektor;
+                                podjetje.valuta = zapis.valuta;
+                            });
                     }
                 }
                 res.send(odgovor);
@@ -98,10 +109,10 @@ const pridobiZgodovinskePodatke = (req, res) => {
                 });
             } else {
                 var zgodovinskiPodatkiMap = [];
-                for (let zgodovinskiPodatek in podjetje.seznamZgodovinskihPodatkov) {
-                    if (podjetje.seznamZgodovinskihPodatkov.hasOwnProperty(zgodovinskiPodatek)) {
-                        if (zgodovinskiPodatek.datum > req.query.zacetek && zgodovinskiPodatek.datum <= req.query.konec) {
-                            zgodovinskiPodatkiMap.push(zgodovinskiPodatek);
+                for (let index in podjetje.seznamZgodovinskihPodatkov) {
+                    if (podjetje.seznamZgodovinskihPodatkov.hasOwnProperty(index)) {
+                        if (podjetje.seznamZgodovinskihPodatkov[index].datum > req.query.zacetek && podjetje.seznamZgodovinskihPodatkov[index].datum <= req.query.konec) {
+                            zgodovinskiPodatkiMap.push(podjetje.seznamZgodovinskihPodatkov[index]);
                         }
                     }
                 }
