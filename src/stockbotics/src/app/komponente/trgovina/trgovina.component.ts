@@ -50,6 +50,7 @@ export class TrgovinaComponent implements OnInit {
     }
     else {
       this.uporabnik.denar = novoStanje;
+      this.uporabnik.seznamBotov.push(bot._id);
       this.streznikPodatki.kupiBota(uporabnik._id, this.uporabnik);
       this.uspesenNakup = true;
     }

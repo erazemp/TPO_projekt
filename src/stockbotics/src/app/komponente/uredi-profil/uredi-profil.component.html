@@ -35,14 +35,19 @@
             </div>
 
             <br>
+            <div class="gumbSpremembe">
             <button id="shrSprBtn" type="submit" class="btn btn-warning">Shrani Spremembe</button>
+            </div>
             <!--<button id="pocistiBtn" type="reset" class="btn btn-secondary" value="Reset">Počisti</button> -->
 
           </div>
         </div>
       </form>
-      <div>
+      <div class="gumbNazaj">
         <button id="nazajBtn" class="btn btn-primary"><a routerLink="profil">Nazaj</a></button>
+      </div>
+      <div class="gumbDenar">
+        <button id="dodajDenar" (click)="dodajSredstva()" class="btn btn-info">Dodaj sredstva</button>
       </div>
     </div>
   </div>

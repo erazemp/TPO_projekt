@@ -33,6 +33,9 @@ router.delete('/uporabniki/:idUporabnika', ctrlUporabniki.izbrisiUporabnika);
 router.route('/uporabniki/:idUporabnika/nakup')
     .put(ctrlApiUporabniki.kupiBota);
 
+router.route('/uporabniki/:idUporabnika/denar')
+    .put(ctrlApiUporabniki.posodobiSredstva);
+
 // boti
 router.get('/boti', ctrlBoti.vrniBote);
 

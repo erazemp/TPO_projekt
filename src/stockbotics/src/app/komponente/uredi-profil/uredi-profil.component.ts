@@ -58,6 +58,16 @@ export class UrediProfilComponent implements OnInit {
     }
   }
 
+  public dodajSredstva():void {
+    this.uporabnik.denar += 1000;
+    this.streznikPodatkiService.posodobiSredstva(this.uporabnik._id, this.uporabnik)
+      .then((uporabnik: any) => {
+        console.log('Uporabnik posodobljen', uporabnik);
+        this.router.navigate(['profil']);
+      }
+      );
+  }
+
   ngOnInit() {
     this.pot.paramMap
       .pipe(
