@@ -12,3 +12,9 @@ th, td {
 .trgovinaTabela {
   padding: 30px;
 }
+.uspesenNakup {
+  color: green;
+}
+.premaloSredstev {
+  color: red;
+}

@@ -48,6 +48,20 @@ var posodobiDatumPrijave = function(req,res){
 };
 */
 
+var kupiBota = function(req,res){
+    var id = req.params.idUporabnika;
+    var posodobljenUporabnik = {
+        denar:req.body.denar
+    };
+    Uporabnik.findByIdAndUpdate(id,posodobljenUporabnik,function(err,el){
+        if(err){
+            res.status(400).json({'sporočilo':'Napaka z odgovorom: '+err});
+        }else{
+            res.status(200).json(el);
+        }
+    });
+};
+
 const vrniUporabnike = (req, res) => {
     Uporabnik.find({}, function(err, uporabniki) {
         var uporabnikiMap = [];
@@ -72,6 +86,7 @@ module.exports = {
     vrniUporabnike,
     pridobiUporabnika,
     posodobiUporabnika,
-    izbrisiUporabnika
+    izbrisiUporabnika,
+    kupiBota
     //posodobiDatumPrijave
 };

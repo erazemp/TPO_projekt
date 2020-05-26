@@ -104,6 +104,17 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
+  public kupiBota(idUporabnika: string, podatkiObrazca: any): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}/nakup`;
+
+    console.log(podatkiObrazca);
+    return this.http
+      .put(url, podatkiObrazca)
+      .toPromise()
+      .then(odgovor => odgovor as any)
+      .catch(this.obdelajNapako);
+  }
+
   public vstaviDb(): Promise<any> {
     const url: string = `${this.apiUrl}/db/vstavi`;
     return this.http

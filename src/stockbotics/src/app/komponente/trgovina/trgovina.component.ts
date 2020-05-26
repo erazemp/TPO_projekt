@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Bot} from "../../razredi/bot";
 import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 import {switchMap} from "rxjs/operators";
+import {Uporabnik} from "../../razredi/uporabnik";
+import {AvtentikacijaService} from "../../storitve/avtentikacija.service";
 
 @Component({
   selector: 'app-trgovina',
@@ -12,8 +14,14 @@ import {switchMap} from "rxjs/operators";
 })
 export class TrgovinaComponent implements OnInit {
   boti: Bot[];
+  public uporabnik : Uporabnik;
+  public premaloSredstev : boolean = false;
+  public uspesenNakup: boolean = false;
 
-  constructor(private streznikPodatki: StreznikPodatkiService,
+  constructor(private avtentikacijaService: AvtentikacijaService,
+              private pot: ActivatedRoute,
+              private router: Router,
+              private streznikPodatki: StreznikPodatkiService,
               private route: ActivatedRoute,
               private title: Title) {
     title.setTitle("Trgovina");
@@ -30,8 +38,43 @@ export class TrgovinaComponent implements OnInit {
     })
   }
 
+  public vrniUporabnika() {
+    this.uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
+  }
+
+  public kupiBota(bot: Bot, uporabnik: Uporabnik) {
+    var novoStanje : number = uporabnik.denar - bot.cena;
+    if(novoStanje < 0) {
+      console.log("Premalo denarja na računu.");
+      this.premaloSredstev = true;
+    }
+    else {
+      this.uporabnik.denar = novoStanje;
+      this.streznikPodatki.kupiBota(uporabnik._id, this.uporabnik);
+      this.uspesenNakup = true;
+    }
+  }
+
+  public resetPremaloSredstev() {
+    this.premaloSredstev = false;
+    this.uspesenNakup = false;
+  }
+
   ngOnInit() {
     this.getVsiBoti();
+
+    this.vrniUporabnika();
+    this.pot.paramMap
+      .pipe(
+        switchMap((params: ParamMap) => {
+          const id = params.get('idUporabnika');
+          console.log("OnInit uredi profil "+ id);
+          return this.streznikPodatki.pridobiUporabnika(this.uporabnik._id);
+
+        }))
+      .subscribe((uporabnik: Uporabnik) => {
+        this.uporabnik = uporabnik;
+      });
   }
 
 }

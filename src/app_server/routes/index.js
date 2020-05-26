@@ -30,6 +30,9 @@ router.route('/uporabniki/:idUporabnika')
 router.get('/uporabniki', ctrlUporabniki.vrniUporabnike);
 router.delete('/uporabniki/:idUporabnika', ctrlUporabniki.izbrisiUporabnika);
 
+router.route('/uporabniki/:idUporabnika/nakup')
+    .put(ctrlApiUporabniki.kupiBota);
+
 // boti
 router.get('/boti', ctrlBoti.vrniBote);
 
