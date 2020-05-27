@@ -53,6 +53,15 @@ export class OsebnaKnjiznicaComponent implements OnInit {
     }
   }
 
+  public izbrisiBota(bot : Bot) {
+    let index : number = this.uporabnik.seznamBotov.indexOf(bot._id);
+    this.uporabnik.seznamBotov.splice(index, 1);
+    console.log("izbris bota iz seznama"+ this.uporabnik.seznamBotov);
+    this.streznikPodatki.izbrisiBotaKnjiznice(this.uporabnik._id, this.uporabnik);
+    let index2 = this.osebnaKnjiznica.indexOf(bot);
+    this.osebnaKnjiznica.splice(index2, 1);
+  }
+
   ngOnInit() {
     this.getVsiBoti();
 

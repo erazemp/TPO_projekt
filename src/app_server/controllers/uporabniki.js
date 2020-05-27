@@ -97,12 +97,30 @@ const izbrisiUporabnika = (req, res) => {
         });
 };
 
+var izbrisBotaKnjiznice = function(req,res){
+    var id = req.params.idUporabnika;
+    var posodobljenUporabnik = {
+        seznamBotov: req.body.seznamBotov
+    };
+    Uporabnik.findByIdAndUpdate(id,posodobljenUporabnik,function(err,el){
+        if(err){
+            res.status(400).json({'sporočilo':'Napaka z odgovorom: '+err});
+        }else{
+            res.status(200).json(el);
+        }
+    });
+};
+
+
+
+
 module.exports = {
     vrniUporabnike,
     pridobiUporabnika,
     posodobiUporabnika,
     izbrisiUporabnika,
     kupiBota,
-    posodobiSredstva
+    posodobiSredstva,
+    izbrisBotaKnjiznice
     //posodobiDatumPrijave
 };

@@ -82,6 +82,17 @@ export class StreznikPodatkiService {
       .catch(this.obdelajNapako);
   }
 
+  public izbrisiBotaKnjiznice(idUporabnika: string, podatkiObrazca: any): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}/knjiznica/izbris`;
+    return this.http
+      .put(url, podatkiObrazca)
+      .toPromise()
+      .then(odgovor => odgovor as any)
+      .catch(this.obdelajNapako);
+  }
+
+
+
   //posodobitev denarnih sredstev uporabnika
   public posodobiSredstva(idUporabnika: string, podatkiObrazca: any): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}/denar`;
@@ -117,7 +128,7 @@ export class StreznikPodatkiService {
 
   public kupiBota(idUporabnika: string, podatkiObrazca: any): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}/nakup`;
-
+    console.log("url nakupa bota "+ url);
     console.log(podatkiObrazca);
     return this.http
       .put(url, podatkiObrazca)
