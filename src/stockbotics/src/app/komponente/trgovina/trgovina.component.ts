@@ -42,6 +42,15 @@ export class TrgovinaComponent implements OnInit {
     this.uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
   }
 
+  public filtrirajTrgovino() {
+    for(let i=0; i<this.boti.length; i++){
+      if(this.uporabnik.seznamBotov.includes(this.boti[i]._id)) {
+        this.boti.splice(i, 1);
+        i -= 1;
+      }
+    }
+  }
+
   public kupiBota(bot: Bot, uporabnik: Uporabnik) {
     var novoStanje : number = uporabnik.denar - bot.cena;
     if(novoStanje < 0) {
@@ -56,9 +65,13 @@ export class TrgovinaComponent implements OnInit {
     }
   }
 
-  public resetPremaloSredstev() {
+  public resetPremaloSredstev(bot : Bot) {
     this.premaloSredstev = false;
-    this.uspesenNakup = false;
+    if(this.uspesenNakup) {
+      let indexKupljenegaBota : number = this.boti.indexOf(bot);
+      this.boti.splice(indexKupljenegaBota, 1);
+      this.uspesenNakup = false;
+    }
   }
 
   ngOnInit() {
@@ -75,6 +88,7 @@ export class TrgovinaComponent implements OnInit {
         }))
       .subscribe((uporabnik: Uporabnik) => {
         this.uporabnik = uporabnik;
+        this.filtrirajTrgovino();
       });
   }
 

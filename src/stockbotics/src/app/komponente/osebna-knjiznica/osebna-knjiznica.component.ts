@@ -43,8 +43,8 @@ export class OsebnaKnjiznicaComponent implements OnInit {
 
   public pridobiOsebnoKnjiznico() {
     for(let i=0; i<this.boti.length; i++){
-      console.log(this.uporabnik.seznamBotov);
-      console.log("trenutni bot" + this.boti[i]._id);
+      //console.log(this.uporabnik.seznamBotov);
+      //console.log("trenutni bot" + this.boti[i]._id);
       if(this.uporabnik.seznamBotov.includes(this.boti[i]._id)) {
           console.log("osebna kniznica " + this.osebnaKnjiznica);
           console.log("pushaj bota " + this.boti[i]);
