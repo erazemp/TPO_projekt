@@ -11,6 +11,7 @@ import {DbComponent} from "../../komponente/db/db.component";
 import {DomacaStranComponent} from "../../komponente/domaca-stran/domaca-stran.component";
 import {LestvicaComponent} from "../../komponente/lestvica/lestvica.component";
 import {TrgovinaComponent} from "../../komponente/trgovina/trgovina.component";
+import {OsebnaKnjiznicaComponent} from "../../komponente/osebna-knjiznica/osebna-knjiznica.component";
 
 const poti: Routes = [
   {
@@ -41,6 +42,9 @@ const poti: Routes = [
   }, {
     path: 'trgovina',
     component: TrgovinaComponent
+  }, {
+    path: 'zbirka',
+    component: OsebnaKnjiznicaComponent
   }
 ];
 

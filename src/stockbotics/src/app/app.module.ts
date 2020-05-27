@@ -18,6 +18,7 @@ import { VsiUporabnikiComponent } from './komponente/vsi-uporabniki/vsi-uporabni
 import { DbComponent } from './komponente/db/db.component';
 import { LestvicaComponent } from './komponente/lestvica/lestvica.component';
 import { TrgovinaComponent } from './komponente/trgovina/trgovina.component';
+import { OsebnaKnjiznicaComponent } from './komponente/osebna-knjiznica/osebna-knjiznica.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { TrgovinaComponent } from './komponente/trgovina/trgovina.component';
     VsiUporabnikiComponent,
     DbComponent,
     LestvicaComponent,
-    TrgovinaComponent
+    TrgovinaComponent,
+    OsebnaKnjiznicaComponent
   ],
   imports: [
     BrowserModule,
