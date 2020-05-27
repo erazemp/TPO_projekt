@@ -14,6 +14,8 @@ mongoose.connect(dbURI, {
 
 mongoose.connection.on('connected', () => {
     console.log(`Mongoose je povezan na ${dbURI}.`);
+    const timer = require('../controllers/timer');
+    timer();
 });
 
 mongoose.connection.on('error', napaka => {
@@ -54,9 +56,8 @@ process.on('SIGTERM', () => {
 
 
 require("./shema-boti");
-//require("./shema-napovedi");
+require("./shema-napovedi");
 //require("./shema-podjetja");
 //require("./shema-skrbniki");
 //require("./shema-super-uporabniki");
 require("./shema-uporabniki");
-// require("./shema-napovedi");

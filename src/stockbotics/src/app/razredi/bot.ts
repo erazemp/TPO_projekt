@@ -13,5 +13,5 @@ export class Bot {
   pridobljeniDenar: number;
   izgubljeniDenar: number;
   naprodaj: boolean;
-  //seznamPodjetij:
+  seznamPodjetij: string[];
 }

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const ctrlNapovedi = require('../napovedi/napovedAPI');
 
 router.get('/hello-world', function (req, res) {
     res.status(200).json({
@@ -8,7 +9,7 @@ router.get('/hello-world', function (req, res) {
 });
 
 router.post('/napovedi', function (req, res) {
-    res.status(200).json({odgovor: req.body.body});
+    res.status(200).json(ctrlNapovedi(req.body));
 });
 
 module.exports = router;

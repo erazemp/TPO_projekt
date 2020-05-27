@@ -48,6 +48,7 @@ router.get('/domaca-stran', ctrlDomacaStran.pridobiPodjetjeNaBorzi);
 router.get('/delnice/:simbol', ctrlDomacaStran.pridobiZgodovinskePodatke);
 
 // trgovanje
-router.get('/trgovanje', ctrlTrgovanjeBota.klicApi);
+// router.get('/trgovanje', ctrlTrgovanjeBota.odlociSe);
+router.post('/trgovanje', ctrlTrgovanjeBota.aktivirajBote);
 
 module.exports = router;
