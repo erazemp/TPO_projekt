@@ -11,6 +11,7 @@ const registracija = (req, res) => {
     uporabnik.ime = req.body.ime;
     uporabnik.priimek = req.body.priimek;
     uporabnik.email = req.body.email;
+    uporabnik.vloga = req.body.vloga;
     uporabnik.uporabniskoIme = req.body.uporabniskoIme;
     uporabnik.ocena = req.body.ocena;
     uporabnik.denar = req.body.denar;

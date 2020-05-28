@@ -11,22 +11,32 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link mr-3" routerLink="">Domov</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link mr-3" routerLink="trgovina">Trgovina</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link mr-3" routerLink="zbirka">Moji trgovalni boti</a>
-            <!--<a href="login.html"><button>Go To Login</button></a> -->
-          </li>
-          <li>
-            <a class="nav-link mr-3" routerLink="lestvica">Lestvica</a>
-          </li>
-          <li>
-            <a class="nav-link mr-3" routerLink="uporabniki">Vsi uporabniki</a>
-          </li>
+          <div *ngIf="!jeSkrbnik()">
+            <li class="nav-item active">
+              <a class="nav-link mr-3" routerLink="">Domov</a>
+            </li>
+          </div>
+          <div *ngIf="jeUporabnik() || jeSuperUporabnik()">
+            <li class="nav-item active">
+              <a class="nav-link mr-3" routerLink="trgovina">Trgovina</a>
+            </li>
+          </div>
+          <div *ngIf="jeUporabnik() || jeSuperUporabnik()">
+            <li class="nav-item active">
+              <a class="nav-link mr-3" routerLink="zbirka">Moji trgovalni boti</a>
+              <!--<a href="login.html"><button>Go To Login</button></a> -->
+            </li>
+          </div>
+          <div *ngIf="jeUporabnik() || jeSuperUporabnik()">
+            <li>
+              <a class="nav-link mr-3" routerLink="lestvica">Lestvica</a>
+            </li>
+          </div>
+          <div *ngIf="jeSkrbnik()">
+            <li>
+              <a class="nav-link mr-3" routerLink="uporabniki">Vsi uporabniki</a>
+            </li>
+          </div>
 
           <div *ngIf="jePrijavljen()">
             <li class="nav-item dropdown active">

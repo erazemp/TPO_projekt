@@ -23,6 +23,37 @@ export class OgrodjeComponent implements OnInit {
     const uporabnik: Uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
     return uporabnik ? uporabnik.uporabniskoIme : 'Gost';
   }
+
+  public jeUporabnik(): boolean {
+    if(!this.jePrijavljen())
+      return false;
+    const uporabnik: Uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
+    if(uporabnik.vloga == 0)
+      return true;
+    else
+      return false;
+  }
+
+  public jeSuperUporabnik(): boolean {
+    if(!this.jePrijavljen())
+      return false;
+    const uporabnik: Uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
+    if(uporabnik.vloga == 1)
+      return true;
+    else
+      return false;
+  }
+
+  public jeSkrbnik(): boolean {
+    if(!this.jePrijavljen())
+      return false;
+    const uporabnik: Uporabnik = this.avtentikacijaService.vrniTrenutnegaUporabnika();
+    if(uporabnik.vloga == 2)
+      return true;
+    else
+      return false;
+  }
+
   ngOnInit() {
   }
 

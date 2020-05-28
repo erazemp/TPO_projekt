@@ -18,6 +18,7 @@ export class RegistracijaComponent implements OnInit {
     uporabniskoIme: '',
     ocena: '0',
     denar: 0,
+    vloga: 0,
     geslo: '',
     email: '',
     ime: '',

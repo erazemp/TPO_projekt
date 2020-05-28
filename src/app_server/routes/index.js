@@ -36,6 +36,9 @@ router.route('/uporabniki/:idUporabnika/nakup')
 router.route('/uporabniki/:idUporabnika/denar')
     .put(ctrlApiUporabniki.posodobiSredstva);
 
+router.route('/uporabniki/:idUporabnika/vloga')
+    .put(ctrlApiUporabniki.posodobiVlogo);
+
 router.route('/uporabniki/:idUporabnika/knjiznica/izbris')
     .put(ctrlApiUporabniki.izbrisBotaKnjiznice);
 

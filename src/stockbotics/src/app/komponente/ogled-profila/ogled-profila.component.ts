@@ -17,6 +17,8 @@ import {SHRAMBA_BRSKALNIKA} from "../../razredi/shramba";
 export class OgledProfilaComponent implements OnInit {
 
   public uporabnik : Uporabnik;
+  public premaloSredstev : boolean = false;
+
   constructor(private avtentikacijaService: AvtentikacijaService, private pot: ActivatedRoute, private router: Router,
               private streznikPodatkiStoritev: StreznikPodatkiService, private title: Title) {
     title.setTitle("Ogled profila");
@@ -31,6 +33,21 @@ export class OgledProfilaComponent implements OnInit {
 
     // return uporabnik ? uporabnik.username : 'Gost';
   }
+
+  public postaniSuperUporabnik() {
+    if(this.uporabnik.denar < 5000) {
+      this.premaloSredstev = true;
+    }
+    else {
+        this.uporabnik.vloga = 1;
+        this.streznikPodatkiStoritev.posodobiVlogo(this.uporabnik._id, this.uporabnik);
+    }
+  }
+
+  public resetPremaloSredstev() {
+    this.premaloSredstev = false;
+  }
+
   ngOnInit() {
     console.log("Vrni uporabnika za ogled profila");
     this.vrniUporabnika();

@@ -84,14 +84,15 @@ export class AvtentikacijaService {
   public  vrniTrenutnegaUporabnika(): Uporabnik {
     if (this.jePrijavljen()) {
       const zeton: string = this.vrniZeton();
-      const { _id, uporabniskoIme, email, ime, priimek } = JSON.parse(this.b64Utf8(zeton.split('.')[1]));
+      const { _id, uporabniskoIme, email, vloga, ime, priimek } = JSON.parse(this.b64Utf8(zeton.split('.')[1]));
       var pridobljen_id = _id;
-      console.log("Pridobi id iz zetona: "+pridobljen_id);
+      //console.log("Pridobi id iz zetona: "+pridobljen_id);
+      //console.log("zetonska vloga: " + vloga);
       //return this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Uporabnik;
       // var uporabnik: Uporabnik;
       // uporabnik = this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id);
 
-      return { _id, uporabniskoIme, email, ime, priimek } as Uporabnik;
+      return { _id, uporabniskoIme, email, vloga, ime, priimek } as Uporabnik;
 
       //return this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Promise<Uporabnik>
       // let uporabnik = this.streznikPodatkiStoritev.pridobiUporabnika(pridobljen_id) as Promise<Uporabnik>;

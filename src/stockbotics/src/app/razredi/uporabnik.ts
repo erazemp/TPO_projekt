@@ -1,6 +1,7 @@
 export class Uporabnik {
   _id: string;
   uporabniskoIme:string;
+  vloga: number;
   ocena: string;
   denar: number;
   datumPrijave: Date;

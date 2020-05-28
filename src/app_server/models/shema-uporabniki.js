@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 
 const uporabnikiShema = new mongoose.Schema({
     ocena: {type: Number, required: false},
+    vloga: {type: Number, required: true}, // 0 - navadni uporabnik, 1 - super uporabnik, 2 - skrbnik
     denar: {type: Number, required: false},
     uporabniskoIme: {type: String, required: true},
     geslo: String,
@@ -37,6 +38,7 @@ uporabnikiShema.methods.generirajJwt = function() {
         _id: this._id,
         uporabniskoIme: this.uporabniskoIme,
         email: this.email,
+        vloga: this.vloga,
         ime: this.ime,
         priimek: this.priimek,
 

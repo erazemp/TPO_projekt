@@ -104,6 +104,15 @@ export class StreznikPodatkiService {
       .catch(this.obdelajNapako);
   }
 
+  public posodobiVlogo(idUporabnika: string, podatkiObrazca: any): Promise<any> {
+    const url: string = `${this.apiUrl}/uporabniki/${idUporabnika}/vloga`;
+    return this.http
+      .put(url, podatkiObrazca)
+      .toPromise()
+      .then(odgovor => odgovor as any)
+      .catch(this.obdelajNapako);
+  }
+
   public vrniVseUporabnike(): Promise<any> {
     const url: string = `${this.apiUrl}/uporabniki`;
     return this.http
