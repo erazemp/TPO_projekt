@@ -62,6 +62,20 @@ export class OsebnaKnjiznicaComponent implements OnInit {
     this.osebnaKnjiznica.splice(index2, 1);
   }
 
+  private zazeniBota(bot: Bot) {
+    this.streznikPodatki.zacniTrgovanje(bot)
+      .then(odgovor => {
+        console.log(odgovor);
+      })
+  }
+
+  private ustaviBota(bot: Bot) {
+    this.streznikPodatki.ustaviTrgovanje(bot)
+      .then(odgovor => {
+        console.log(odgovor);
+      })
+  }
+
   ngOnInit() {
     this.getVsiBoti();
 

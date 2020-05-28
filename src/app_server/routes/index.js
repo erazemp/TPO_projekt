@@ -53,11 +53,12 @@ router.delete('/db/izbrisi', ctrlDb.izbrisi);
 router.post('/db/vstavi', ctrlDb.vstavi);
 
 // domaca stran
-router.get('/domaca-stran', ctrlDomacaStran.pridobiPodjetjeNaBorzi);
-router.get('/delnice/:simbol', ctrlDomacaStran.pridobiZgodovinskePodatke);
+router.get('/domaca-stran', ctrlDomacaStran.pridobiPodjetja);
+router.get('/delnice/:simbol', ctrlDomacaStran.pridobiZgodovinskePodatkePodjetja);
 
 // trgovanje
 // router.get('/trgovanje', ctrlTrgovanjeBota.odlociSe);
-router.post('/trgovanje', ctrlTrgovanjeBota.aktivirajBote);
+router.post('/trgovanje/zazeni', ctrlTrgovanjeBota.aktivirajBota);
+router.post('/trgovanje/zaustavi', ctrlTrgovanjeBota.ustaviBota);
 
 module.exports = router;

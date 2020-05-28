@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
 const Bot = mongoose.model('TrgovalniBot');
-const drugaBaza = require('../models/db2');
-var Podjetje = drugaBaza.model('Podjetje');
 
 var vstavi = (req, res) => {
     Uporabnik.find({}).deleteMany({})
@@ -51,7 +49,7 @@ var vstavi = (req, res) => {
                 "parameterInvesticije": 2,
                 "parameterNakupa": 7,
                 "parameterProdaje": 4,
-                "zagnan": true,
+                "zagnan": false,
                 "dobickonosnost": 0,
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
@@ -72,7 +70,7 @@ var vstavi = (req, res) => {
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
                 "naprodaj": true,
-                //"seznamPodjetij": null
+                "seznamPodjetij": ['AAPL', 'AMZN']
             });
             Bot.create({
                 "ime": "Bot3",
@@ -88,7 +86,7 @@ var vstavi = (req, res) => {
                 "pridobljeniDenar": 0,
                 "izgubljeniDenar": 0,
                 "naprodaj": true,
-                //"seznamPodjetij": null
+                "seznamPodjetij": ['AMZN']
             });
         });
     res.status(200).json({obvestilo: "Uspešno dodani podatki"});

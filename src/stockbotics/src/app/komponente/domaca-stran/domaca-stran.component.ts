@@ -12,7 +12,6 @@ import {Podjetje} from "../../razredi/podjetje";
 export class DomacaStranComponent implements OnInit {
 
   private seznamPodjetij: Array<Podjetje>;
-  private timeFrame: number = 10;
 
   constructor(private title: Title,
               private streznikService: StreznikPodatkiService,
@@ -28,11 +27,7 @@ export class DomacaStranComponent implements OnInit {
   }
 
   private pridobiZgodovinskePodatkePodjetja(podjetje: Podjetje): void {
-    // zadnji dan, kjer so podatki na API-ju je 22.1.2020, zato se kot danasnji datum vzame 22.1.2020
-    const datum: Date = new Date(2020, 0, 22);
-    const datumOd: number = datum.setDate(datum.getDate() - this.timeFrame);
-    const datumDo: Date = new Date(2020, 0, 22);
-    this.streznikService.prikaziZgodovinskePodatke(podjetje.simbol, this.datePipe.transform(datumOd, 'yyyy-MM-dd'), this.datePipe.transform(datumDo, 'yyyy-MM-dd'))
+    this.streznikService.prikaziZgodovinskePodatke(podjetje.simbol)
       .then(odgovor => {
         console.log(odgovor);
       });

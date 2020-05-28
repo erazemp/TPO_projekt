@@ -18,7 +18,6 @@ const sproziTrgovanje = () => {
             for (let i in boti) {
                 if (boti.hasOwnProperty(i)) {
                     if (boti[i].zagnan) {
-                        console.log('ok');
                         odlociSe(boti[i]);
                     }
                 }
@@ -32,26 +31,13 @@ const posodobiNapovedi = () => {
         .exec((napaka, podjetja) => {
             if (napaka)
                 return;
-            Napoved.deleteMany({});
+            Napoved.deleteMany({}).exec(napaka => {
+                if (napaka)
+                    console.log(napaka);
+            });
             for (let i in podjetja) {
                 if (podjetja.hasOwnProperty(i)) {
-                    console.log(podjetja[i]);
-                    const options = {
-                        url: 'http://localhost:3000/api-napovedi/napovedi',
-                        json: true,
-                        body: podjetja[i].zgodovinskiPodatki,
-                        method: "POST",
-                    };
-                    request(options, function (napaka, odgovor, body) {
-                            const high = body.high;
-                            const low = body.low;
-                            Napoved.create({
-                                "simbol_podjetja": podjetja[i].simbol,
-                                "high": high,
-                                "low": low
-                            });
-                        }
-                    );
+                    apiKlicNapovedi(podjetja[i]);
                 }
             }
         });
@@ -77,18 +63,49 @@ const odlociSe = (bot) => {
     }
 };
 
-const aktivirajBote = (req, res) => {
-    console.log(req.body);
+const aktivirajBota = (req, res) => {
     Bot.findByIdAndUpdate({_id: req.body._id}, {zagnan: true}, (napaka, bot) => {
         if (napaka) {
             res.status(500).json(napaka);
         }
+        res.status(200).json({odgovor: "Bot uspesno zagnan"});
     })
+};
+
+const ustaviBota = (req, res) => {
+    Bot.findByIdAndUpdate({_id: req.body._id}, {zagnan: false}, (napaka, bot) => {
+        if (napaka) {
+            res.status(500).json(napaka);
+        }
+        res.status(200).json({odgovor: "Bot uspesno zaustavljen"});
+    })
+};
+
+const apiKlicNapovedi = (podjetje) => {
+    const options = {
+        url: 'http://localhost:3000/api-napovedi/napovedi',
+        json: true,
+        body: {
+            podatki: podjetje.seznamZgodovinskihPodatkov
+        },
+        method: "POST",
+    };
+    request(options, function (napaka, odgovor, body) {
+            const high = body.high;
+            const low = body.low;
+            Napoved.create({
+                "simbol_podjetja": podjetje.simbol,
+                "high": high,
+                "low": low
+            });
+        }
+    );
 };
 
 module.exports = {
     odlociSe,
-    aktivirajBote,
+    aktivirajBota,
+    ustaviBota,
     posodobiNapovedi,
     sproziTrgovanje
 };

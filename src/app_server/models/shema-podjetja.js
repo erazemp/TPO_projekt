@@ -3,12 +3,12 @@ const drugaBaza = require('./db2');
 
 const zgodovinskiPodatkiShema = new mongoose.Schema({
     datum: {type:String, required: true},
-    open: {type:Number, required: true},
-    high: {type:Number, required: true},
-    low: {type:Number, required: true},
-    close: {type:Number, required: true},
-    volume: {type:Number, required: true},
-    adjusted: {type:Number, required: true}
+    open: {type:Number, default: 0},
+    high: {type:Number, default: 0},
+    low: {type:Number, default: 0},
+    close: {type:Number, default: 0},
+    volume: {type:Number, default: 0},
+    adjusted: {type:Number, default: 0}
 });
 
 const podjetjaShema = new mongoose.Schema({

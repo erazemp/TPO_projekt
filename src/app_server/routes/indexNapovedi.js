@@ -8,8 +8,6 @@ router.get('/hello-world', function (req, res) {
     })
 });
 
-router.post('/napovedi', function (req, res) {
-    res.status(200).json(ctrlNapovedi(req.body));
-});
+router.post('/napovedi', ctrlNapovedi);
 
 module.exports = router;

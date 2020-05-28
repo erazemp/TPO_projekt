@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
+import {Bot} from "../razredi/bot";
 import { environment } from "../../environments/environment";
 import {RezultatPreveriGeslo} from "../razredi/rezultat-preveri-geslo";
 
@@ -176,10 +177,24 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
-  public prikaziZgodovinskePodatke(simbol: string, zacetek: string, konec: string): Promise<any> {
-    const url: string = `${this.apiUrl}/delnice/${simbol}?zacetek=${zacetek}&konec=${konec}`;
+  public prikaziZgodovinskePodatke(simbol: string): Promise<any> {
+    const url: string = `${this.apiUrl}/delnice/${simbol}`;
     return this.http
       .get(url)
+      .toPromise();
+  }
+
+  public zacniTrgovanje(bot: Bot): Promise<any> {
+    const url: string = `${this.apiUrl}/trgovanje/zazeni`;
+    return this.http
+      .post(url, bot)
+      .toPromise();
+  }
+
+  public ustaviTrgovanje(bot: Bot): Promise<any> {
+    const url: string = `${this.apiUrl}/trgovanje/zaustavi`;
+    return this.http
+      .post(url, bot)
       .toPromise();
   }
 }
