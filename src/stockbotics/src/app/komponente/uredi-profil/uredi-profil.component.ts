@@ -97,6 +97,7 @@ export class UrediProfilComponent implements OnInit {
 
   public zapriObrazecGeslo() {
     this.prikaziObrazecGesla = false;
+    this.uspesnoSpremenjeno = false;
     this.submitedGeslo = false;
     this.staroGesloOk = false;
     this.jeGesloUstrezno = false;
@@ -106,7 +107,7 @@ export class UrediProfilComponent implements OnInit {
   }
 
   public potrdiSprememboGesla() {
-    this.uspesnoSpremenjeno = false;
+    this.submitedGeslo = true;
     console.log("TUKAJ!!");
     if (this.validacijaGesla()) {
 

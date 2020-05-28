@@ -65,8 +65,8 @@ const preveriGeslo = (req, res) => {
 
     let tempUporabnik = new Uporabnik();
 
-    console.log(req.body.id);
-    console.log(req.body.geslo);
+    console.log("iskani id: " + req.body.id);
+    console.log("geslo ^: " + req.body.geslo);
 
     Uporabnik.findById(req.body.id,function(err,uporabnik){
             if (err) {
@@ -77,8 +77,8 @@ const preveriGeslo = (req, res) => {
             }
         });
 
-    console.log(tempUporabnik._id);
-    console.log(tempUporabnik.geslo);
+    console.log("prejeti iz baze id: " + tempUporabnik._id);
+    console.log("geslo ^: " + tempUporabnik.geslo);
 
     if (tempUporabnik.preveriGeslo(req.body.geslo)) {
         return res.status(200).json({"gesloOk": true});
