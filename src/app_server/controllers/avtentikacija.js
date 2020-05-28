@@ -57,8 +57,41 @@ const prijava = (req, res) => {
     })(req, res);
 };
 
+const preveriGeslo = (req, res) => {
+
+    if (!req.body.email || !req.body.geslo) {
+        return res.status(400).json({"sporočilo": "Zahtevani so vsi podatki"});
+    }
+
+    let tempUporabnik = new Uporabnik();
+
+    console.log(req.body.id);
+    console.log(req.body.geslo);
+
+    Uporabnik.findById(req.body.id,function(err,uporabnik){
+            if (err) {
+                return res.status(500).json({"sporočilo": err});
+            }
+            else {
+                tempUporabnik = uporabnik;
+            }
+        });
+
+    console.log(tempUporabnik._id);
+    console.log(tempUporabnik.geslo);
+
+    if (tempUporabnik.preveriGeslo(req.body.geslo)) {
+        return res.status(200).json({"gesloOk": true});
+    }
+    else {
+        return res.status(401).json({"sporočilo": "Napačno geslo"});
+    }
+
+};
+
 
 module.exports = {
     registracija,
-    prijava
+    prijava,
+    preveriGeslo
 };

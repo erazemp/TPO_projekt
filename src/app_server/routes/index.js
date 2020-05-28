@@ -21,6 +21,7 @@ router.get('/hello-world', function (req, res) {
 // avtentikacija
 router.post('/registracija', ctrlAvtentikacija.registracija);
 router.post('/prijava', ctrlAvtentikacija.prijava);
+router.post('/preveri-geslo', ctrlAvtentikacija.preveriGeslo);
 
 // uporabnik
 router.route('/uporabniki/:idUporabnika')

@@ -33,7 +33,8 @@ export class UrediProfilComponent implements OnInit {
   public editUporabnik = {
     uporabniskoIme: '',
     email: '',
-    geslo: ''
+    geslo: '',
+    id: ''
   };
 
   public validacija(): boolean {
@@ -46,7 +47,6 @@ export class UrediProfilComponent implements OnInit {
   }
 
   public validacijaGesla(): boolean {
-    console.log(this.jeGesloUstrezno);
     if (this.jeGesloUstrezno && this.preveriStaroGeslo() && this.preveriEnakostGesel() && this.novoGeslo != "" && this.staroGeslo != "" && this.ponovljenoGeslo != "") {
       return true;
     }
@@ -107,13 +107,15 @@ export class UrediProfilComponent implements OnInit {
 
   public potrdiSprememboGesla() {
     this.uspesnoSpremenjeno = false;
+    console.log("TUKAJ!!");
     if (this.validacijaGesla()) {
 
       // TODO nevem zakaj ampak ko je zgorej if enak false, preusmeri nazaj na ogled profila :(
 
+      console.log("TUKAJ!!");
+
       this.zapriObrazecGeslo();
       this.uspesnoSpremenjeno = true;
-
       // TODO spremeni geslo v bazi
     }
   }
@@ -123,9 +125,12 @@ export class UrediProfilComponent implements OnInit {
   }
 
   public preveriStaroGeslo() {
-
-    // TODO: preveri ce se staro geslo ujema
-    return true;
+    this.editUporabnik.id = this.uporabnik._id;
+    this.editUporabnik.geslo = this.staroGeslo;
+    if (this.avtentikacijaService.preveriGeslo(this.editUporabnik)) {
+      return true;
+    }
+    return false;
   }
 
   OnInputGeslo(event: any) {

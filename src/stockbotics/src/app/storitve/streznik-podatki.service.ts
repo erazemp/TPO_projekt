@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { environment } from "../../environments/environment";
+import {RezultatPreveriGeslo} from "../razredi/rezultat-preveri-geslo";
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,16 @@ export class StreznikPodatkiService {
 
   public prijava(uporabnik: any): Promise<RezultatAvtentikacije> {
     return this.avtentikacija('prijava', uporabnik);
+  }
+
+  public preveriGeslo(uporabnik: any): Promise<RezultatPreveriGeslo> {
+    const url: string = `${this.apiUrl}/preveri-geslo`;
+    // console.log(uporabnik);
+    return this.http
+      .post(url, uporabnik)
+      .toPromise()
+      .then(rezultat => rezultat as RezultatPreveriGeslo)
+      .catch(this.obdelajNapako);
   }
 
   public pridobiUporabnika(id: string): Promise<Uporabnik> {
