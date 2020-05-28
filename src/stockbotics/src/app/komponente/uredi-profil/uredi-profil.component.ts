@@ -4,6 +4,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Uporabnik} from "../../razredi/uporabnik";
 import {switchMap} from "rxjs/operators";
 import {Title} from "@angular/platform-browser";
+import {AvtentikacijaService} from "../../storitve/avtentikacija.service";
 
 @Component({
   selector: 'app-uredi-profil',
@@ -12,17 +13,27 @@ import {Title} from "@angular/platform-browser";
 })
 export class UrediProfilComponent implements OnInit {
 
-  constructor(private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router,
+  constructor(private avtentikacijaService: AvtentikacijaService, private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router,
               private title: Title) {
     title.setTitle("Uredi profil");
   }
 
   public uporabnik: Uporabnik;
-  public  submited = false;
+  public submited = false;
+  public submitedGeslo = false;
+  public prikaziObrazecGesla = false;
+  public staroGesloOk = false;
+  public jeGesloUstrezno = false;
+  public uspesnoSpremenjeno = false;
+
+  public staroGeslo = '';
+  public novoGeslo = '';
+  public ponovljenoGeslo = '';
 
   public editUporabnik = {
     uporabniskoIme: '',
-    email: ''
+    email: '',
+    geslo: ''
   };
 
   public validacija(): boolean {
@@ -31,6 +42,14 @@ export class UrediProfilComponent implements OnInit {
       return true;
     }
     this.submited = true;
+    return false;
+  }
+
+  public validacijaGesla(): boolean {
+    console.log(this.jeGesloUstrezno);
+    if (this.jeGesloUstrezno && this.preveriStaroGeslo() && this.preveriEnakostGesel() && this.novoGeslo != "" && this.staroGeslo != "" && this.ponovljenoGeslo != "") {
+      return true;
+    }
     return false;
   }
 
@@ -66,6 +85,65 @@ export class UrediProfilComponent implements OnInit {
         this.router.navigate(['profil']);
       }
       );
+  }
+
+  public odpriObrazecGesla() {
+    this.prikaziObrazecGesla = true;
+    this.uspesnoSpremenjeno = false;
+    this.submitedGeslo = false;
+    this.staroGesloOk = false;
+    this.jeGesloUstrezno = false;
+  }
+
+  public zapriObrazecGeslo() {
+    this.prikaziObrazecGesla = false;
+    this.submitedGeslo = false;
+    this.staroGesloOk = false;
+    this.jeGesloUstrezno = false;
+    this.ponovljenoGeslo = '';
+    this.staroGeslo = '';
+    this.novoGeslo = '';
+  }
+
+  public potrdiSprememboGesla() {
+    this.uspesnoSpremenjeno = false;
+    if (this.validacijaGesla()) {
+
+      // TODO nevem zakaj ampak ko je zgorej if enak false, preusmeri nazaj na ogled profila :(
+
+      this.zapriObrazecGeslo();
+      this.uspesnoSpremenjeno = true;
+
+      // TODO spremeni geslo v bazi
+    }
+  }
+
+  public preveriEnakostGesel() {
+    return this.novoGeslo == this.ponovljenoGeslo;
+  }
+
+  public preveriStaroGeslo() {
+
+    // TODO: preveri ce se staro geslo ujema
+    return true;
+  }
+
+  OnInputGeslo(event: any) {
+    const gesloRegx = /^.{8,}$/;
+    if (gesloRegx.test(this.novoGeslo)) {
+      this.jeGesloUstrezno = true;
+    } else {
+      this.jeGesloUstrezno = false;
+    }
+  }
+
+  OnInputStaroGeslo(event: any) {
+    if (this.uporabnik.geslo == this.staroGeslo) {
+      this.staroGesloOk = true;
+    }
+    else {
+      this.staroGesloOk = false;
+    }
   }
 
   ngOnInit() {
