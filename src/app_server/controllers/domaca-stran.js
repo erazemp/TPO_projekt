@@ -81,8 +81,8 @@ const pridobiZgodovinskePodatkePodjetij = () => {
                 if (podjetja.hasOwnProperty(i)) {
                     podjetja[i].seznamZgodovinskihPodatkov = [];
                     apiKlicZaZgodovinskePodatke(podjetja[i],
-                        new Date(new Date(2020, 0, 12).toISOString().split('T')[0]),
-                        new Date(new Date(2020, 0, 22).toISOString().split('T')[0]));
+                        new Date(2020, 0, 12).toISOString().split('T')[0],
+                        new Date(2020, 0, 22).toISOString().split('T')[0]);
                 }
             }
         });

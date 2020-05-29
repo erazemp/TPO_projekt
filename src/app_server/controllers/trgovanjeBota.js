@@ -43,24 +43,21 @@ const posodobiNapovedi = () => {
         });
 };
 
-const odlociSe = (bot) => {
+const odlociSe = async (bot) => {
+    let botObject = {bot};
     for (let i in bot.seznamPodjetij) {
         if (bot.seznamPodjetij.hasOwnProperty(i)) {
-            Napoved.findOne({simbol_podjetja: bot.seznamPodjetij[i]})
-                .exec((napaka, napoved) => {
-                    if (napaka)
-                        return napaka;
-                    const high = napoved.high;
-                    const low = napoved.low;
-                    if (high > low)
-                        kupiDelnico(bot, bot.seznamPodjetij[i]);
-                    else if (low > high)
-                        prodajDelnico(bot, bot.seznamPodjetij[i]);
-                    else
-                        zadrziDelnico(bot, bot.seznamPodjetij[i]);
-                });
+            const napoved = await Napoved.findOne({simbol_podjetja: bot.seznamPodjetij[i]}).exec();
+            const random = Math.floor(Math.random() * 3);
+            if (random === 0)
+                await kupiDelnico(botObject, bot.seznamPodjetij[i]);
+            else if (random === 1)
+                await prodajDelnico(botObject, bot.seznamPodjetij[i]);
+            else
+                await zadrziDelnico(botObject, bot.seznamPodjetij[i]);
         }
     }
+    botObject.bot.save();
 };
 
 const aktivirajBota = (req, res) => {
@@ -73,6 +70,7 @@ const aktivirajBota = (req, res) => {
 };
 
 const ustaviBota = (req, res) => {
+    // todo: dodaj parameter investicije uporabniku
     Bot.findByIdAndUpdate({_id: req.body._id}, {zagnan: false}, (napaka, bot) => {
         if (napaka) {
             res.status(500).json(napaka);
