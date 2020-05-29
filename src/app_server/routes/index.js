@@ -21,7 +21,6 @@ router.get('/hello-world', function (req, res) {
 // avtentikacija
 router.post('/registracija', ctrlAvtentikacija.registracija);
 router.post('/prijava', ctrlAvtentikacija.prijava);
-// router.post('/preveri-geslo', ctrlAvtentikacija.preveriGeslo);
 
 // uporabnik
 router.route('/uporabniki/:idUporabnika')
@@ -42,6 +41,10 @@ router.route('/uporabniki/:idUporabnika/vloga')
 
 router.route('/uporabniki/:idUporabnika/knjiznica/izbris')
     .put(ctrlApiUporabniki.izbrisBotaKnjiznice);
+
+router.post('/uporabniki/:idUporabnika/preveri-geslo', ctrlApiUporabniki.preveriGesloUporabnika);
+
+router.post('/uporabniki/:idUporabnika/spremeni-geslo', ctrlApiUporabniki.spremeniGesloUporabnika);
 
 // boti
 router.get('/boti', ctrlBoti.vrniBote);

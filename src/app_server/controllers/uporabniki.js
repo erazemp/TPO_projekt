@@ -125,7 +125,53 @@ var izbrisBotaKnjiznice = function(req,res){
     });
 };
 
+const preveriGesloUporabnika = (req, res) => {
 
+    var id = req.params.idUporabnika;
+    var geslo = req.body.geslo;
+
+    if (!id || !geslo) {
+        return res.status(400).json({"sporočilo": "Zahtevani so vsi podatki"});
+    }
+
+    Uporabnik.findById(id,function(err,uporabnik){
+        if(err){
+            console.log("Pridobi uporabnika za preverjanje gesla " + uporabnik);
+            console.log(err);
+            res.status(500).json({"sporočilo":"Napaka z odgovorom: "+err});
+        }else{
+            if (uporabnik.preveriGeslo(geslo)) {
+                return res.status(200).json({"gesloOk": true});
+            }
+            else {
+                return res.status(401).json({"gesloOk": false});
+            }
+        }
+    });
+};
+
+const spremeniGesloUporabnika = (req, res) => {
+
+    var id = req.params.idUporabnika;
+    var geslo = req.body.geslo;
+
+    if (!id || !geslo) {
+        return res.status(400).json({"sporočilo": "Zahtevani so vsi podatki"});
+    }
+    var uporabnikNovoGeslo = new Uporabnik();
+    uporabnikNovoGeslo._id = id;
+    uporabnikNovoGeslo.nastaviGeslo(geslo);
+
+    Uporabnik.findByIdAndUpdate(id, uporabnikNovoGeslo,function(err,uporabnik){
+        if(err){
+            console.log("Posodobi geslo uporabnika " + uporabnik);
+            console.log(err);
+            res.status(500).json({"sporočilo":"Napaka z odgovorom: "+err});
+        }else{
+            return res.status(200).json({"gesloSpremenjeno": true});
+        }
+    });
+};
 
 
 module.exports = {
@@ -136,6 +182,8 @@ module.exports = {
     kupiBota,
     posodobiSredstva,
     izbrisBotaKnjiznice,
-    posodobiVlogo
+    posodobiVlogo,
+    preveriGesloUporabnika,
+    spremeniGesloUporabnika
     //posodobiDatumPrijave
 };

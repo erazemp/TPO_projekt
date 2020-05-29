@@ -5,7 +5,6 @@ import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import {Bot} from "../razredi/bot";
 import { environment } from "../../environments/environment";
-import {RezultatPreveriGeslo} from "../razredi/rezultat-preveri-geslo";
 
 @Injectable({
   providedIn: 'root'
@@ -65,13 +64,35 @@ export class StreznikPodatkiService {
     return this.avtentikacija('prijava', uporabnik);
   }
 
-  public preveriGeslo(uporabnik: any): Promise<RezultatPreveriGeslo> {
-    const url: string = `${this.apiUrl}/preveri-geslo`;
+  public async preveriGesloUporabnika(uporabnik: any): Promise<boolean> {
+    const url: string = `${this.apiUrl}/uporabniki/${uporabnik.id}/preveri-geslo`;
     // console.log(uporabnik);
     return this.http
       .post(url, uporabnik)
       .toPromise()
-      .then(rezultat => rezultat as RezultatPreveriGeslo)
+      .then(function () {
+        console.log("return true");
+        return true;},
+        function () {
+          console.log("return false");
+        return false;
+      })
+      .catch(this.obdelajNapako);
+  }
+
+  public async spremeniGesloUporabnika(uporabnik: any): Promise<boolean> {
+    const url: string = `${this.apiUrl}/uporabniki/${uporabnik.id}/spremeni-geslo`;
+    // console.log(uporabnik);
+    return this.http
+      .post(url, uporabnik)
+      .toPromise()
+      .then(function () {
+          console.log("return true");
+          return true;},
+        function () {
+          console.log("return false");
+          return false;
+        })
       .catch(this.obdelajNapako);
   }
 

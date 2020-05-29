@@ -4,7 +4,6 @@ import { Uporabnik } from '../razredi/uporabnik';
 import { RezultatAvtentikacije } from '../razredi/rezultat-avtentikacije';
 import { StreznikPodatkiService } from './streznik-podatki.service';
 import {promise} from "selenium-webdriver";
-import {RezultatPreveriGeslo} from "../razredi/rezultat-preveri-geslo";
 
 @Injectable({
   providedIn: 'root'
@@ -37,16 +36,6 @@ export class AvtentikacijaService {
       .then((rezultatAvtentikacije: RezultatAvtentikacije) => {
         this.shraniZeton(rezultatAvtentikacije["žeton"]);
       });
-  }
-
-  public preveriGeslo(uporabnik: any): boolean {
-    let vrni = false;
-    this.streznikPodatkiStoritev
-      .preveriGeslo(uporabnik)
-      .then((rezultatPreveriGeslo: RezultatPreveriGeslo) => {
-        vrni = rezultatPreveriGeslo["gesloOk"];
-      });
-    return vrni;
   }
 
   public odjava(): void {

@@ -4,7 +4,6 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Uporabnik} from "../../razredi/uporabnik";
 import {switchMap} from "rxjs/operators";
 import {Title} from "@angular/platform-browser";
-import {AvtentikacijaService} from "../../storitve/avtentikacija.service";
 
 @Component({
   selector: 'app-uredi-profil',
@@ -13,7 +12,7 @@ import {AvtentikacijaService} from "../../storitve/avtentikacija.service";
 })
 export class UrediProfilComponent implements OnInit {
 
-  constructor(private avtentikacijaService: AvtentikacijaService, private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router,
+  constructor(private streznikPodatkiService: StreznikPodatkiService, private pot: ActivatedRoute, private router: Router,
               private title: Title) {
     title.setTitle("Uredi profil");
   }
@@ -47,7 +46,7 @@ export class UrediProfilComponent implements OnInit {
   }
 
   public validacijaGesla(): boolean {
-    if (this.jeGesloUstrezno && this.preveriStaroGeslo() && this.preveriEnakostGesel() && this.novoGeslo != "" && this.staroGeslo != "" && this.ponovljenoGeslo != "") {
+    if (this.jeGesloUstrezno && this.staroGesloOk && this.preveriEnakostGesel() && this.novoGeslo != "" && this.staroGeslo != "" && this.ponovljenoGeslo != "") {
       return true;
     }
     return false;
@@ -97,7 +96,6 @@ export class UrediProfilComponent implements OnInit {
 
   public zapriObrazecGeslo() {
     this.prikaziObrazecGesla = false;
-    this.uspesnoSpremenjeno = false;
     this.submitedGeslo = false;
     this.staroGesloOk = false;
     this.jeGesloUstrezno = false;
@@ -106,18 +104,28 @@ export class UrediProfilComponent implements OnInit {
     this.novoGeslo = '';
   }
 
-  public potrdiSprememboGesla() {
+  public async potrdiSprememboGesla() {
     this.submitedGeslo = true;
-    console.log("TUKAJ!!");
+    console.log("nisem še preveril starega gesla: " + this.staroGesloOk);
+    await this.preveriStaroGeslo();
+    console.log("preveril sem staro geslo: " + this.staroGesloOk);
     if (this.validacijaGesla()) {
 
-      // TODO nevem zakaj ampak ko je zgorej if enak false, preusmeri nazaj na ogled profila :(
+      console.log("validacija gesla ok!! spreminjam geslo");
 
-      console.log("TUKAJ!!");
+      this.editUporabnik.id = this.uporabnik._id;
+      this.editUporabnik.geslo = this.novoGeslo;
+      await this.streznikPodatkiService
+        .spremeniGesloUporabnika(this.editUporabnik)
+        .then((result: boolean) => {
+          console.log("result: " + result);
+          this.uspesnoSpremenjeno = result;
+          return result;
+        });
 
-      this.zapriObrazecGeslo();
-      this.uspesnoSpremenjeno = true;
-      // TODO spremeni geslo v bazi
+      if (this.uspesnoSpremenjeno) {
+        this.zapriObrazecGeslo();
+      }
     }
   }
 
@@ -125,13 +133,17 @@ export class UrediProfilComponent implements OnInit {
     return this.novoGeslo == this.ponovljenoGeslo;
   }
 
-  public preveriStaroGeslo() {
+  public async preveriStaroGeslo() {
     this.editUporabnik.id = this.uporabnik._id;
     this.editUporabnik.geslo = this.staroGeslo;
-    if (this.avtentikacijaService.preveriGeslo(this.editUporabnik)) {
-      return true;
-    }
-    return false;
+
+    await this.streznikPodatkiService
+      .preveriGesloUporabnika(this.editUporabnik)
+      .then((result: boolean) => {
+        console.log("result: " + result);
+        this.staroGesloOk = result;
+        return result;
+      });
   }
 
   OnInputGeslo(event: any) {

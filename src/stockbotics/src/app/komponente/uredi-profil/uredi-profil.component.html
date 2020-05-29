@@ -39,8 +39,9 @@
                 <label>Staro geslo:</label>
                 <input type="password" [(ngModel)]="staroGeslo"  (keyup)="OnInputStaroGeslo($event)"class="form-control" name="geslo">
                 <div *ngIf="submitedGeslo">
-                  <div *ngIf="staroGeslo== '' " class="text-danger">Vpišite svoje trenutno geslo!</div>
-                  <div *ngIf="!staroGesloOk" class="text-danger">To ni vaše trenutno geslo!</div>
+                  <div *ngIf="staroGeslo== '' " class="wrong-pass">Vpišite svoje trenutno geslo!</div>
+                  <div *ngIf="!staroGesloOk" class="wrong-pass">To ni vaše trenutno geslo!</div>
+                  <div *ngIf="staroGesloOk" class="right-pass">Vnešeno pravilno geslo!</div>
                 </div>
               </div>
 
@@ -48,8 +49,9 @@
                 <label>Novo geslo:</label>
                 <input type="password" [(ngModel)]="novoGeslo" (keyup)="OnInputGeslo($event)" class="form-control" name="ponovigeslo">
                 <div *ngIf="submitedGeslo">
-                  <div *ngIf="!preveriEnakostGesel()" class="text-danger">Gesli se morata ujemati!</div>
-                  <div *ngIf="jeGesloUstrezno == false && novoGeslo != '' " class="text-danger">Geslo mora biti dolgo vsaj 8 znakov!</div>
+                  <div *ngIf="!preveriEnakostGesel()" class="wrong-pass">Gesli se morata ujemati!</div>
+                  <div *ngIf="novoGeslo == '' " class="wrong-pass">Prosim vnesite novo geslo</div>
+                  <div *ngIf="jeGesloUstrezno == false && novoGeslo != '' " class="wrong-pass">Geslo mora biti dolgo vsaj 8 znakov!</div>
                 </div>
               </div>
 
@@ -57,11 +59,11 @@
                 <label>Ponovi novo geslo:</label>
                 <input type="password" [(ngModel)]="ponovljenoGeslo" (keyup)="OnInputGeslo($event)" class="form-control" name="ponovigeslo">
                 <div *ngIf="submitedGeslo">
-                  <div *ngIf="!preveriEnakostGesel()" class="text-danger">Gesli se morata ujemati!</div>
+                  <div *ngIf="!preveriEnakostGesel()" class="wrong-pass">Gesli se morata ujemati!</div>
                 </div>
               </div>
 
-              <div *ngIf="submitedGeslo && (jeGesloUstrezno || !staroGesloOk)">
+              <div *ngIf="submitedGeslo && (!jeGesloUstrezno || !staroGesloOk)">
                 <p class="mb-1"><i class="far fa-question-circle" id="info-circle" class="text-info"></i> password information.</p>
                 <div class="information">
                   <p class=" instruction text-muted mb-0">Your password must contain at least 8 letters!</p>
@@ -69,20 +71,22 @@
                 </div>
               </div>
 
+              <p *ngIf="submitedGeslo && !uspesnoSpremenjeno" class="wrong-pass">Geslo ni bilo spremenjeno!</p>
+
               <div class="row">
                 <div>
-                  <button id="potrdiNovoGeslo" (click)="potrdiSprememboGesla()" class="btn btn-warning">Potrdi geslo</button>
+                  <button id="potrdiNovoGeslo" (click)="potrdiSprememboGesla()" type="button" class="btn btn-warning">Potrdi geslo</button>
                 </div>
                 <div>
-                  <button id="zavrniNovoGeslo" (click)="zapriObrazecGeslo()" class="btn btn-warning">Zavrni geslo</button>
+                  <button id="zavrniNovoGeslo" (click)="zapriObrazecGeslo()" type="button" class="btn btn-warning">Zavrni geslo</button>
                 </div>
               </div>
             </div>
 
-            <p *ngIf="uspesnoSpremenjeno" style="color:aqua">Uspešno spremenjeno geslo!</p>
+            <p *ngIf="uspesnoSpremenjeno" class="right-pass">Uspešno spremenjeno geslo!</p>
 
             <div *ngIf="!prikaziObrazecGesla">
-              <button id="sprGeslo" (click)="odpriObrazecGesla()" class="btn btn-warning">Spremeni geslo</button>
+              <button id="sprGeslo" (click)="odpriObrazecGesla()" type="button" class="btn btn-warning">Spremeni geslo</button>
             </div>
 
             <br>

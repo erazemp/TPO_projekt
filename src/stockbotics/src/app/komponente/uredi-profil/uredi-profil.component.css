@@ -16,3 +16,11 @@
 #zavrniNovoGeslo {
   margin-left: 10px;
 }
+
+.wrong-pass {
+  color: yellow;
+}
+
+.right-pass {
+  color: aqua;
+}
