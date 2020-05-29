@@ -63,14 +63,6 @@
                 </div>
               </div>
 
-              <div *ngIf="submitedGeslo && (!jeGesloUstrezno || !staroGesloOk)">
-                <p class="mb-1"><i class="far fa-question-circle" id="info-circle" class="text-info"></i> password information.</p>
-                <div class="information">
-                  <p class=" instruction text-muted mb-0">Your password must contain at least 8 letters!</p>
-                  <p class=" instruction text-muted mt-1">Your password must contain at least one Upper and Lower case letter and at least one number!</p>
-                </div>
-              </div>
-
               <p *ngIf="submitedGeslo && !uspesnoSpremenjeno" class="wrong-pass">Geslo ni bilo spremenjeno!</p>
 
               <div class="row">

@@ -63,14 +63,14 @@ const apiKlicZaSeznamDelnic = () => {
 
 
 const pridobiZgodovinskePodatkePodjetja = (req, res) => {
-    Podjetje.find({simbol: req.params.simbol})
+    Podjetje.findOne({simbol: req.params.simbol})
         .exec((napaka, podjetje) => {
             if (napaka)
                 res.status(500).json(napaka);
             if (!podjetje)
                 res.status(404).json({odgovor: "ne najdem podjetja"});
 
-            res.status(200).json(podjetje[0].seznamZgodovinskihPodatkov);
+            res.status(200).json(podjetje.seznamZgodovinskihPodatkov);
         });
 };
 
