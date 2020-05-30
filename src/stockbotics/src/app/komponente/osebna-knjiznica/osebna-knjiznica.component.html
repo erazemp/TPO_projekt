@@ -14,6 +14,7 @@
           <td><button class="btn btn-info" data-toggle="modal" attr.data-target="#modalDetails{{bot._id}}">Podrobnosti</button></td>
           <td *ngIf="!bot.zagnan" (click)="zazeniBota(bot)"><button class="btn btn-info">Zagon</button></td>
           <td *ngIf="bot.zagnan" (click)="ustaviBota(bot)"><button class="btn btn-info">Ustavitev</button></td>
+<!--          <td><button (click)="zazeniAliUstaviBota(bot, $event)"></button></td>-->
           <td><button class="btn btn-info">Spremeni parametre</button></td>
           <td><button (click)="izbrisiBota(bot)" class="btn btn-info">Izbriši bota</button></td>
         </tr>

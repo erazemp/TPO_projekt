@@ -2,6 +2,7 @@ const request = require('request');
 const mongoose = require('mongoose');
 const Bot = mongoose.model('TrgovalniBot');
 const Napoved = mongoose.model('Napoved');
+const Uporabnik = mongoose.model('Uporabnik');
 const drugaBaza = require("../models/db2");
 const Podjetje = drugaBaza.model('Podjetje');
 const zadrziDelnico = require('../controllers/zadrziDelnico');
@@ -70,12 +71,32 @@ const aktivirajBota = (req, res) => {
 };
 
 const ustaviBota = (req, res) => {
-    // todo: dodaj parameter investicije uporabniku
     Bot.findByIdAndUpdate({_id: req.body._id}, {zagnan: false}, (napaka, bot) => {
         if (napaka) {
             res.status(500).json(napaka);
         }
-        res.status(200).json({odgovor: "Bot uspesno zaustavljen"});
+        Uporabnik.find({})
+            .exec((napaka, uporabniki) => {
+                if (napaka)
+                    res.status(500).json(napaka);
+                if (!uporabniki)
+                    res.status(404).json({obvestilo: "ne najdem uporabnika"});
+                for (let i in uporabniki) {
+                    if (uporabniki.hasOwnProperty(i)) {
+                        let uporabnik = uporabniki[i];
+                        var inArray = uporabnik.seznamBotov.some(function (bot) {
+                            return bot.equals(bot._id);
+                        });
+                        if (inArray) {
+                            uporabnik.denar += bot.parameterInvesticije;
+                        }
+                        uporabnik.save();
+                    }
+                }
+                bot.parameterInvesticije = 0;
+                bot.save();
+                res.status(201).json({obvestilo: "bot uspesno ustavjen"});
+            });
     })
 };
 

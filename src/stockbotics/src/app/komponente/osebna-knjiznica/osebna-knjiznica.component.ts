@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Bot} from "../../razredi/bot";
 import {Uporabnik} from "../../razredi/uporabnik";
 import {AvtentikacijaService} from "../../storitve/avtentikacija.service";
@@ -15,7 +15,7 @@ import {switchMap} from "rxjs/operators";
 export class OsebnaKnjiznicaComponent implements OnInit {
   boti: Bot[];
   osebnaKnjiznica: Bot[] = [];
-  public uporabnik : Uporabnik;
+  public uporabnik: Uporabnik;
 
   constructor(private avtentikacijaService: AvtentikacijaService,
               private pot: ActivatedRoute,
@@ -29,7 +29,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
   public getVsiBoti(): void {
     this.route.paramMap
       .pipe(
-        switchMap((params:ParamMap) => {
+        switchMap((params: ParamMap) => {
           return this.streznikPodatki.vrniVseBote();
         })
       ).subscribe(najdeniBoti => {
@@ -42,21 +42,22 @@ export class OsebnaKnjiznicaComponent implements OnInit {
   }
 
   public pridobiOsebnoKnjiznico() {
-    for(let i=0; i<this.boti.length; i++){
+    this.osebnaKnjiznica = [];
+    for (let i = 0; i < this.boti.length; i++) {
       //console.log(this.uporabnik.seznamBotov);
       //console.log("trenutni bot" + this.boti[i]._id);
-      if(this.uporabnik.seznamBotov.includes(this.boti[i]._id)) {
-          console.log("osebna kniznica " + this.osebnaKnjiznica);
-          console.log("pushaj bota " + this.boti[i]);
-          this.osebnaKnjiznica.push(this.boti[i]);
+      if (this.uporabnik.seznamBotov.includes(this.boti[i]._id)) {
+        console.log("osebna kniznica " + this.osebnaKnjiznica);
+        console.log("pushaj bota " + this.boti[i]);
+        this.osebnaKnjiznica.push(this.boti[i]);
       }
     }
   }
 
-  public izbrisiBota(bot : Bot) {
-    let index : number = this.uporabnik.seznamBotov.indexOf(bot._id);
+  public izbrisiBota(bot: Bot) {
+    let index: number = this.uporabnik.seznamBotov.indexOf(bot._id);
     this.uporabnik.seznamBotov.splice(index, 1);
-    console.log("izbris bota iz seznama"+ this.uporabnik.seznamBotov);
+    console.log("izbris bota iz seznama" + this.uporabnik.seznamBotov);
     this.streznikPodatki.izbrisiBotaKnjiznice(this.uporabnik._id, this.uporabnik);
     let index2 = this.osebnaKnjiznica.indexOf(bot);
     this.osebnaKnjiznica.splice(index2, 1);
@@ -66,6 +67,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
     this.streznikPodatki.zacniTrgovanje(bot)
       .then(odgovor => {
         console.log(odgovor);
+        this.osveziStran();
       })
   }
 
@@ -73,7 +75,13 @@ export class OsebnaKnjiznicaComponent implements OnInit {
     this.streznikPodatki.ustaviTrgovanje(bot)
       .then(odgovor => {
         console.log(odgovor);
+        this.osveziStran();
       })
+  }
+
+  private osveziStran() {
+    this.router.navigate(['/zbirka'], );
+    this.ngOnInit();
   }
 
   ngOnInit() {
@@ -84,7 +92,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
       .pipe(
         switchMap((params: ParamMap) => {
           const id = params.get('idUporabnika');
-          console.log("OnInit uredi profil "+ id);
+          console.log("OnInit uredi profil " + id);
           return this.streznikPodatki.pridobiUporabnika(this.uporabnik._id);
 
         }))
