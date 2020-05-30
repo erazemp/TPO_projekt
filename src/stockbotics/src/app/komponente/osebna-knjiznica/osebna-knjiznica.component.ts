@@ -6,6 +6,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {Title} from "@angular/platform-browser";
 import {switchMap} from "rxjs/operators";
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-osebna-knjiznica',
@@ -22,7 +23,8 @@ export class OsebnaKnjiznicaComponent implements OnInit {
               private router: Router,
               private streznikPodatki: StreznikPodatkiService,
               private route: ActivatedRoute,
-              private title: Title) {
+              private title: Title,
+              private notifier: NotifierService) {
     title.setTitle("Osebna knjiznica");
   }
 
@@ -68,6 +70,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
       .then(odgovor => {
         console.log(odgovor);
         this.osveziStran();
+        this.notifier.notify("default", "Bot "+ bot.ime +" zagnan");
       })
   }
 
@@ -76,6 +79,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
       .then(odgovor => {
         console.log(odgovor);
         this.osveziStran();
+        this.notifier.notify("default", "Bot "+ bot.ime +" zaustavljen");
       })
   }
 

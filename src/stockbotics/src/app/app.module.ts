@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {DatePipe} from "@angular/common";
+import {NotifierModule} from "angular-notifier";
 
 import { AppComponent } from './app.component';
 import { RegistracijaComponent } from './komponente/registracija/registracija.component';
@@ -41,7 +42,22 @@ import { OsebnaKnjiznicaComponent } from './komponente/osebna-knjiznica/osebna-k
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppUsmerjanjeModule
+    AppUsmerjanjeModule,
+    NotifierModule.withConfig({
+      theme: 'material',
+      behaviour: {
+        autoHide: 2000,
+        stacking: false
+      },
+      position: {
+        horizontal: {
+          position: 'middle',
+        },
+        vertical: {
+          position: "top",
+        }
+      }
+    })
   ],
   providers: [ DatePipe ],
   bootstrap: [OgrodjeComponent]
