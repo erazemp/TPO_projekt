@@ -5,43 +5,41 @@
   <button (click)="pridobiZgodovinskePodatkePodjetja(podjetje)" data-toggle="modal" data-target="#modalDelnica">
     {{podjetje.ime}}
   </button>
+</div>
 
-  <div class="modal fade bd-example-modal-lg" id="modalDelnica" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">{{trenutnoPodjetjeIme}}</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            <div *ngIf="imaTrenutnoPodjetjePodatkeODelnicah()">
-              <div *ngFor="let delnica of trenutnePodjetjeDelnice; let i = index">
-                <div  *ngIf="i == trenutnePodjetjeDelnice.length-1" >
-                  <div style="float: left">
-                    <h6>adjusted: {{delnica.adjusted}}</h6>
-                    <h6>close: {{delnica.close}}</h6>
-                    <h6>open: {{delnica.open + delnica.close}}</h6>
-                    <h6>high: {{delnica.high}}</h6>
-                    <h6>low: {{delnica.low}}</h6>
-                    <h6>volume: {{delnica.volume}}</h6>
-                    <h6>datum: {{delnica.datum}}</h6>
-                  </div>
-                  <div style="float: right">
-                    <img href="https://miro.medium.com/max/525/1*p_f8-fZS6VBeVzLWK-RXqw.png" class="pull-right" border="0" alt="poopImage" src="https://miro.medium.com/max/525/1*p_f8-fZS6VBeVzLWK-RXqw.png" width="200" height="200">
-                  </div>
-                </div>
+<div class="modal fade bd-example-modal-lg" id="modalDelnica" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{trenutnoPodjetjeIme}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div *ngIf="trenutnoPodjetjeDelnice != null && trenutnoPodjetjeDelnice.length > 0">
+            <div *ngFor="let delnica of trenutnoPodjetjeDelnice; let i = index">
+              <div  *ngIf="i == trenutnoPodjetjeDelnice.length-1" >
+                <h5>NASDAQ: {{trenutnoPodjetjeSimbol}}</h5>
+                <br/>
+                <br/>
+                <h6>Vrednost delnice: {{delnica.adjusted | number:'.0-2'}}</h6>
+                <h6>Cena prodaje: {{delnica.low | number:'.0-2'}}</h6>
+                <h6>Cena nakupa: {{delnica.high | number:'.0-2'}}</h6>
               </div>
             </div>
-            <div *ngIf="!imaTrenutnoPodjetjePodatkeODelnicah()">
-              <h6>Izbrano podjete trenutno nima podatkov o njegovih delnicah</h6>
-            </div>
+          </div>
+          <div *ngIf="!(trenutnoPodjetjeDelnice != null && trenutnoPodjetjeDelnice.length > 0)">
+            <h6>Izbrano podjetje trenutno nima podatkov o njegovih delnicah</h6>
+          </div>
+          <br/>
+          <br/>
+          <div class="chart-container" style="position: relative; height:300px; width:100%">
+            <canvas id="canvasDiv">{{ linechart }}</canvas>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
