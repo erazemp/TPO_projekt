@@ -205,10 +205,14 @@ export class StreznikPodatkiService {
       .toPromise();
   }
 
-  public zacniTrgovanje(bot: Bot): Promise<any> {
+  public zacniTrgovanje(bot: Bot, parameter: string): Promise<any> {
     const url: string = `${this.apiUrl}/trgovanje/zazeni`;
+    const req = {
+       bot: bot,
+       parameterInvesticije: parameter
+    };
     return this.http
-      .post(url, bot)
+      .post(url, req)
       .toPromise();
   }
 

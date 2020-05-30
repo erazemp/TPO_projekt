@@ -7,6 +7,7 @@ import {StreznikPodatkiService} from "../../storitve/streznik-podatki.service";
 import {Title} from "@angular/platform-browser";
 import {switchMap} from "rxjs/operators";
 import { NotifierService } from "angular-notifier";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-osebna-knjiznica',
@@ -17,6 +18,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
   boti: Bot[];
   osebnaKnjiznica: Bot[] = [];
   public uporabnik: Uporabnik;
+  private parameter: string;
 
   constructor(private avtentikacijaService: AvtentikacijaService,
               private pot: ActivatedRoute,
@@ -66,7 +68,7 @@ export class OsebnaKnjiznicaComponent implements OnInit {
   }
 
   private zazeniBota(bot: Bot) {
-    this.streznikPodatki.zacniTrgovanje(bot)
+    this.streznikPodatki.zacniTrgovanje(bot, this.parameter)
       .then(odgovor => {
         console.log(odgovor);
         this.osveziStran();

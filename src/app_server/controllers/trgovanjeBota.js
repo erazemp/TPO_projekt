@@ -62,7 +62,7 @@ const odlociSe = async (bot) => {
 };
 
 const aktivirajBota = (req, res) => {
-    Bot.findByIdAndUpdate({_id: req.body._id}, {zagnan: true}, (napaka, bot) => {
+    Bot.findByIdAndUpdate({_id: req.body.bot._id}, {zagnan: true, parameterInvesticije: req.body.parameterInvesticije}, (napaka, bot) => {
         if (napaka) {
             res.status(500).json(napaka);
         }
