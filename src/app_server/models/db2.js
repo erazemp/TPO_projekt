@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/stockbotics2';
 if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGODB_CLOUD_URI;
+    dbURI = process.env.MONGODB_CLOUD_URI2;
 }
 
 let povezava = mongoose.createConnection(dbURI, {
