@@ -64,6 +64,9 @@
                 <div *ngIf="premaloSredstev">
                   <h6 class="premaloSredstev">Premalo sredstev za izvedbo nakupa.</h6>
                 </div>
+                <div *ngIf="limitBotovDosezen">
+                  <h6 class="limitDosezen">Glede na tvojo vlogo si dosegel limit zakupljenih botov.</h6>
+                </div>
                 <div *ngIf="uspesenNakup">
                   <h6 class="uspesenNakup">Nakup je bil uspešen.</h6>
                 </div>

@@ -17,6 +17,7 @@ export class TrgovinaComponent implements OnInit {
   public uporabnik : Uporabnik;
   public premaloSredstev : boolean = false;
   public uspesenNakup: boolean = false;
+  public limitBotovDosezen: boolean = false;
 
   constructor(private avtentikacijaService: AvtentikacijaService,
               private pot: ActivatedRoute,
@@ -53,7 +54,15 @@ export class TrgovinaComponent implements OnInit {
 
   public kupiBota(bot: Bot, uporabnik: Uporabnik) {
     var novoStanje : number = uporabnik.denar - bot.cena;
-    if(novoStanje < 0) {
+    if (this.uporabnik.vloga == 0 && this.uporabnik.seznamBotov.length == 3) {
+      console.log("Navadni uporabnik lahko kupi največ 3 bote.");
+      this.limitBotovDosezen = true;
+    }
+    else if (this.uporabnik.vloga == 1 && this.uporabnik.seznamBotov.length == 10) {
+      console.log("Super uporabnik lahko kupi največ 10 botov.");
+      this.limitBotovDosezen = true;
+    }
+    else if(novoStanje < 0) {
       console.log("Premalo denarja na računu.");
       this.premaloSredstev = true;
     }
@@ -67,6 +76,7 @@ export class TrgovinaComponent implements OnInit {
 
   public resetPremaloSredstev(bot : Bot) {
     this.premaloSredstev = false;
+    this.limitBotovDosezen = false;
     if(this.uspesenNakup) {
       let indexKupljenegaBota : number = this.boti.indexOf(bot);
       this.boti.splice(indexKupljenegaBota, 1);
