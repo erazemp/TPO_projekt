@@ -9,6 +9,11 @@ const zadrziDelnico = require('../controllers/zadrziDelnico');
 const kupiDelnico = require('../controllers/kupiDelnico');
 const prodajDelnico = require('../controllers/prodajDelnico');
 
+let napovediApiUrl = 'http://localhost:3000/api-napovedi';
+if (process.env.NODE_ENV === 'production') {
+    napovediApiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api-napovedi';
+}
+
 const sproziTrgovanje = () => {
     console.log('sprozi trgovanje');
     Bot.find({})
@@ -98,7 +103,7 @@ const ustaviBota = (req, res) => {
 
 const apiKlicNapovedi = (podjetje) => {
     const options = {
-        url: 'http://localhost:3000/api-napovedi/napovedi',
+        url: napovediApiUrl + '/napovedi',
         json: true,
         body: {
             podatki: podjetje.seznamZgodovinskihPodatkov
