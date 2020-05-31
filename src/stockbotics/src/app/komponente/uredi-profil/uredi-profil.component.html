@@ -4,7 +4,7 @@
 
     <div class="col-md-12 col-12">
       <form (ngSubmit)="urediProfil()">
-        <div id="form1">
+        <div id="form1" style="padding-left: 2%;width: 90%">
           <div id="form">
             <div class="form-group">
               <h2 id="naslovUrejanjeDogodka">Urejanje Profila</h2>
@@ -34,7 +34,7 @@
               </div>
             </div>
 
-            <div *ngIf="prikaziObrazecGesla" class="form-group">
+            <div *ngIf="prikaziObrazecGesla" class="obrazecGeslo form-group">
               <div class="form-group">
                 <label>Staro geslo:</label>
                 <input type="password" [(ngModel)]="staroGeslo"  (keyup)="OnInputStaroGeslo($event)"class="form-control" name="geslo">
@@ -75,24 +75,22 @@
               </div>
             </div>
 
-            <p *ngIf="uspesnoSpremenjeno" class="right-pass">Uspešno spremenjeno geslo!</p>
+            <p *ngIf="uspesnoSpremenjeno" class="right-pass">Geslo je bilo uspešno spremenjeno!</p>
 
             <div *ngIf="!prikaziObrazecGesla">
               <button id="sprGeslo" (click)="odpriObrazecGesla()" type="button" class="btn btn-warning">Spremeni geslo</button>
             </div>
-
-            <br>
             <div class="gumbSpremembe">
               <button id="shrSprBtn" type="submit" class="btn btn-warning">Shrani Spremembe</button>
             </div>
             <!--<button id="pocistiBtn" type="reset" class="btn btn-secondary" value="Reset">Počisti</button> -->
 
           </div>
+          <div class="gumbDenar">
+            <button id="dodajDenar" type="button" (click)="dodajSredstva()" class="btn btn-info">Dodaj sredstva</button>
+          </div>
         </div>
       </form>
-      <div class="gumbDenar">
-        <button id="dodajDenar" (click)="dodajSredstva()" class="btn btn-info">Dodaj sredstva</button>
-      </div>
     </div>
   </div>
 </div>

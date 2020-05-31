@@ -1,7 +1,7 @@
 
 <div id="box" class="container">
   <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" id="signin">
-    <h2 class="text-center">Sign Up</h2>
+    <h2 class="text-center" style="color: #303030">Sign Up</h2>
     <!-- Sign Up -->
     <div class="signup-form">
       <form (submit)="izvediRegistracijo()" id="signup-form" autocomplete="off">
@@ -44,15 +44,15 @@
             <div *ngIf="ponovljenoGeslo != novUporabnik.geslo" class="text-danger">Gesli se morata ujemati!</div>
           </div>
 
-          <p class="mb-1"><i class="far fa-question-circle" id="info-circle" class="text-info"></i> password information.</p>
-          <div class="information">
-            <p class=" instruction text-muted mb-0">Your password must contain at least 8 letters!</p>
-            <p class=" instruction text-muted mt-1">Your password must contain at least one Upper and Lower case letter and at least one number!</p>
-          </div>
+<!--          <p class="mb-1"><i class="far fa-question-circle" id="info-circle" class="text-info"></i> password information.</p>-->
+<!--          <div class="information">-->
+<!--            <p class=" instruction text-muted mb-0">Your password must contain at least 8 letters!</p>-->
+<!--            <p class=" instruction text-muted mt-1">Your password must contain at least one Upper and Lower case letter and at least one number!</p>-->
+<!--          </div>-->
         </div>
 
         <div class="form-group">
-          <button id="button-submit" type="submit" class="form-control form-control-lg">Registracija</button>
+          <button id="button-submit" type="submit" class="btn-info form-control form-control-lg">Registracija</button>
         </div>
       </form>
     </div>

@@ -12,3 +12,42 @@ th, td {
 .trgovinaTabela {
   padding: 30px;
 }
+
+.modal-content {
+  background: #D3D3D3;
+}
+.btn-success {
+  background: #303030;
+  border-color: lightgreen;
+  color: white;
+}
+
+.btn-success:hover {
+  background: lightgreen;
+  border-color: lightgreen;
+  color: black;
+}
+
+.btn-warning {
+  background: #303030;
+  border-color: #D3D3D3;
+  color: white;
+}
+
+.btn-warning:hover {
+  background:  #D3D3D3;
+  border-color: #D3D3D3;
+  color: black;
+}
+
+.btn-info {
+  background: #303030;
+  border-color: aqua;
+  color: white;
+}
+
+.btn-info:hover {
+  background: aqua;
+  border-color: aqua;
+  color: black;
+}

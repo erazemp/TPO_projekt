@@ -1,11 +1,24 @@
-<p>
-  domaca-stran works!... odgovor strežnika:
-</p>
-<div *ngFor="let podjetje of seznamPodjetij">
-  <button (click)="pridobiZgodovinskePodatkePodjetja(podjetje)" data-toggle="modal" data-target="#modalDelnica">
-    {{podjetje.ime}}
-  </button>
-</div>
+<!--<p>-->
+<!--  domaca-stran works!... odgovor strežnika:-->
+<!--</p>-->
+
+<table class="table table-hover table-dark">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Ime podjetja</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let podjetje of seznamPodjetij; let i = index">
+    <th>{{i + 1}}.</th>
+    <td (click)="pridobiZgodovinskePodatkePodjetja(podjetje)" data-toggle="modal" data-target="#modalDelnica">
+      {{podjetje.ime}}
+    </td>
+  </tr>
+  </tbody>
+</table>
+
 
 <div class="modal fade bd-example-modal-lg" id="modalDelnica" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-md">
@@ -22,8 +35,6 @@
             <div *ngFor="let delnica of trenutnoPodjetjeDelnice; let i = index">
               <div  *ngIf="i == trenutnoPodjetjeDelnice.length-1" >
                 <h5>NASDAQ: {{trenutnoPodjetjeSimbol}}</h5>
-                <br/>
-                <br/>
                 <h6>Vrednost delnice: {{delnica.adjusted | number:'.0-2'}}</h6>
                 <h6>Cena prodaje: {{delnica.low | number:'.0-2'}}</h6>
                 <h6>Cena nakupa: {{delnica.high | number:'.0-2'}}</h6>

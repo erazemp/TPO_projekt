@@ -42,10 +42,6 @@ input[type='submit']{
 #forgot_pass{
   color: white;
 }
-#button-submit{
-  background-color: rgba(220,53,64,0.5);
-  color: white;
-}
 .information{
   display: none;
 }
@@ -70,4 +66,16 @@ input[type='submit']{
   .instruction{
     font-size: 0.7em;
   }
+}
+
+.btn-info:hover {
+  background-color: #303030;
+  border-color: aqua;
+  color: white;
+}
+
+.btn-info {
+  background-color: aqua;
+  border-color: aqua;
+  color: black;
 }
