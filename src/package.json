@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app_server/bin/www",
-    "test": "nyc --reporter=html --reporter=text --report-dir=../test/pokritost mocha ../test/test.js --exit"
+    "test": "nyc --reporter=html --reporter=text --report-dir=../test/pokritost mocha ../test/test.js --timeout=10000 --exit"
   },
   "engines": {
     "node": ">=12.5.0",

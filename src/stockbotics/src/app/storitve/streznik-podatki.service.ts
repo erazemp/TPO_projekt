@@ -12,7 +12,8 @@ import { environment } from "../../environments/environment";
 export class StreznikPodatkiService {
 
   // private apiUrl = 'https://tpo-14-stockbotics.herokuapp.com/api';
-  private apiUrl = 'http://localhost:3000/api';
+  // private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {
   }

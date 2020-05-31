@@ -26,22 +26,18 @@ const sproziTrgovanje = () => {
         });
 };
 
-const posodobiNapovedi = () => {
+const posodobiNapovedi = async () => {
     console.log('posodobi napovedi');
-    Podjetje.find({})
-        .exec((napaka, podjetja) => {
-            if (napaka)
-                return;
-            Napoved.deleteMany({}).exec(napaka => {
-                if (napaka)
-                    console.log(napaka);
-            });
-            for (let i in podjetja) {
-                if (podjetja.hasOwnProperty(i)) {
-                    apiKlicNapovedi(podjetja[i]);
-                }
-            }
-        });
+    let podjetja = await Podjetje.find({}).exec();
+    await Napoved.deleteMany({}).exec();
+    for (let i in podjetja) {
+        if (podjetja.hasOwnProperty(i)) {
+            apiKlicNapovedi(podjetja[i]);
+        }
+    }
+    return new Promise((resolve => {
+        resolve();
+    }))
 };
 
 const odlociSe = async (bot) => {
@@ -117,6 +113,9 @@ const apiKlicNapovedi = (podjetje) => {
                 "high": high,
                 "low": low
             });
+            return new Promise((resolve => {
+                resolve();
+            }))
         }
     );
 };

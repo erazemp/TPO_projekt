@@ -1,6 +1,9 @@
+import {Podjetje} from "../../stockbotics/src/app/razredi/podjetje";
+
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
 const Bot = mongoose.model('TrgovalniBot');
+const DomacaStran = require('../controllers/domaca-stran');
 
 var vstavi = (req, res) => {
     Uporabnik.find({}).deleteMany({})
@@ -89,6 +92,9 @@ var vstavi = (req, res) => {
                 "seznamPodjetij": ['AMZN']
             });
         });
+
+    DomacaStran.apiKlicZaSeznamDelnic();
+    DomacaStran.pridobiZgodovinskePodatkePodjetij();
     res.status(200).json({obvestilo: "Uspešno dodani podatki"});
 };
 
@@ -105,6 +111,12 @@ var izbrisi = (req, res) => {
             if (napaka) {
                 return res.status(500).json(napaka);
             }
+        });
+
+    Podjetje.find({}).deleteMany({})
+        .exec(napaka => {
+            if (napaka)
+                return res.status(500).json(napaka);
         });
 
     res.status(200).json({obvestilo: "Uspesen izbris"});
