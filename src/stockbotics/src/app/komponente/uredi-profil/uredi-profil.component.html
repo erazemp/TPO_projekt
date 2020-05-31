@@ -11,7 +11,7 @@
               <label for="uporabniskoIme">Spremeni Uporabniško ime:</label>
               <input id="uporabniskoIme" [(ngModel)]="editUporabnik.uporabniskoIme" value="{{uporabnik.uporabniskoIme}}" name="naslov" type="text" class="form-control" placeholder="Uporabnisko ime">
               <div *ngIf="submited">
-                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="text-danger">Prosim vnesite uporabnisko ime!</div>
+                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="wrong-string">Prosim vnesite uporabnisko ime!</div>
               </div>
             </div>
 
@@ -28,9 +28,10 @@
 
             <div class="form-group">
               <label for="email">Spremeni Email:</label>
-              <input id="email" [(ngModel)]="editUporabnik.email" value="{{uporabnik.email}}" name="email" type="text" class="form-control" placeholder="Email">
+              <input id="email" [(ngModel)]="editUporabnik.email" value="{{uporabnik.email}}" (keyup)="OnInputEmail($event)" name="email" type="text" class="form-control" placeholder="Email">
               <div *ngIf="submited">
-                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="text-danger">Prosim vnesite email!</div>
+                <div *ngIf="editUporabnik.uporabniskoIme== '' " class="wrong-string">Prosim vnesite email!</div>
+                <div *ngIf="!this.emailJeUstrezen" class="wrong-string">Vneseni email ne ustreza formatu emaila!</div>
               </div>
             </div>
 

@@ -8,40 +8,40 @@
         <div class="form-group">
           <input type="text" [(ngModel)]="novUporabnik.ime" (keyup)="OnInputIme($event)" class="form-control form-control-lg" placeholder="&#xf007; Ime " name="ime">
           <div *ngIf="submited">
-            <div *ngIf="novUporabnik.ime== '' " class="text-danger">Prosim napišite ime uporabnika!</div>
-            <div *ngIf="niUstreznoIme == true && novUporabnik.ime != '' " class="text-danger">Neveljaven vnos imena! <br> Filter: Xxxxx Yyyyy</div>
+            <div *ngIf="novUporabnik.ime== '' " class="wrong-string">Prosim napišite ime uporabnika!</div>
+            <div *ngIf="niUstreznoIme == true && novUporabnik.ime != '' " class="wrong-string">Neveljaven vnos imena! <br> Filter: Xxxxx Yyyyy</div>
           </div>
         </div>
         <div class="form-group">
           <input type="text" [(ngModel)]="novUporabnik.priimek" (keyup)="OnInputPriimek($event)" class="form-control form-control-lg" placeholder="&#xf007; Priimek" name="priimek">
           <div *ngIf="submited">
-            <div *ngIf="novUporabnik.priimek== '' " class="text-danger">Prosim napišite priimek uporabnika!</div>
-            <div *ngIf="niUstrezenPriimek == true && novUporabnik.priimek != '' " class="text-danger">Neveljaven vnos priimka! <br> Filter: Xxxxx Yyyyy</div>
+            <div *ngIf="novUporabnik.priimek== '' " class="wrong-string">Prosim napišite priimek uporabnika!</div>
+            <div *ngIf="niUstrezenPriimek == true && novUporabnik.priimek != '' " class="wrong-string">Neveljaven vnos priimka! <br> Filter: Xxxxx Yyyyy</div>
           </div>
         </div>
         <div class="form-group">
           <input type="text" [(ngModel)]="novUporabnik.uporabniskoIme" class="form-control form-control-lg" placeholder="&#xf2bd; Uporabniško ime" name="username">
           <div *ngIf="submited">
-            <div *ngIf="novUporabnik.uporabniskoIme== '' " class="text-danger">Prosim napišite uporabniško ime uporabnika!</div>
+            <div *ngIf="novUporabnik.uporabniskoIme== '' " class="wrong-string">Prosim napišite uporabniško ime uporabnika!</div>
           </div>
         </div>
         <div class="form-group">
           <input class="form-control form-control-lg" type="email" (keyup)="OnInputEmail($event)" [(ngModel)]="novUporabnik.email" placeholder="&#xf0e0; Elektronski naslov" name="email">
           <div *ngIf="submited">
-            <div *ngIf="novUporabnik.email== '' " class="text-danger">Prosim napišite elektronski naslov!</div>
-            <div *ngIf="niUstrezenEmail == true && novUporabnik.email != '' " class="text-danger">Neveljaven vnos elektronskega naslova!</div>
+            <div *ngIf="novUporabnik.email== '' " class="wrong-string">Prosim napišite elektronski naslov!</div>
+            <div *ngIf="niUstrezenEmail == true && novUporabnik.email != '' " class="wrong-string">Neveljaven vnos elektronskega naslova!</div>
           </div>
         </div>
         <div class="form-group">
           <input type="password" [(ngModel)]="novUporabnik.geslo"  (keyup)="OnInputGeslo($event)"class="form-control form-control-lg" placeholder="&#xf023; Geslo" name="geslo">
           <div *ngIf="submited">
-            <div *ngIf="novUporabnik.geslo== '' " class="text-danger">Prosim izberite geslo!</div>
-            <div *ngIf="niUstreznoGeslo == true && novUporabnik.geslo != '' " class="text-danger">Geslo mora biti dolgo vsaj 8 znakov!</div>
-            <div *ngIf="ponovljenoGeslo != novUporabnik.geslo" class="text-danger">Gesli se morata ujemati!</div>
+            <div *ngIf="novUporabnik.geslo== '' " class="wrong-string">Prosim izberite geslo!</div>
+            <div *ngIf="niUstreznoGeslo == true && novUporabnik.geslo != '' " class="wrong-string">Geslo mora biti dolgo vsaj 8 znakov!</div>
+            <div *ngIf="ponovljenoGeslo != novUporabnik.geslo" class="wrong-string">Gesli se morata ujemati!</div>
           </div>
           <input type="password" (keyup)="OnInput($event)" class="form-control form-control-lg mt-3" placeholder="&#xf023; Ponovi geslo" name="ponovigeslo">
           <div *ngIf="submited">
-            <div *ngIf="ponovljenoGeslo != novUporabnik.geslo" class="text-danger">Gesli se morata ujemati!</div>
+            <div *ngIf="ponovljenoGeslo != novUporabnik.geslo" class="wrong-string">Gesli se morata ujemati!</div>
           </div>
 
 <!--          <p class="mb-1"><i class="far fa-question-circle" id="info-circle" class="text-info"></i> password information.</p>-->

@@ -79,3 +79,7 @@ input[type='submit']{
   border-color: aqua;
   color: black;
 }
+
+.wrong-string {
+  color: yellow;
+}

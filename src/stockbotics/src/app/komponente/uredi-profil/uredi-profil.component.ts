@@ -24,6 +24,7 @@ export class UrediProfilComponent implements OnInit {
   public staroGesloOk = false;
   public jeGesloUstrezno = false;
   public uspesnoSpremenjeno = false;
+  public emailJeUstrezen = false;
 
   public staroGeslo = '';
   public novoGeslo = '';
@@ -38,7 +39,10 @@ export class UrediProfilComponent implements OnInit {
 
   public validacija(): boolean {
     // ce so podatki obrazca prazni
-    if (this.editUporabnik.uporabniskoIme && this.editUporabnik.email) {
+    if (!this.emailJeUstrezen) {
+      this.OnInputEmail(null);
+    }
+    if (this.editUporabnik.uporabniskoIme && this.editUporabnik.email && this.emailJeUstrezen) {
       return true;
     }
     this.submited = true;
@@ -86,7 +90,7 @@ export class UrediProfilComponent implements OnInit {
       );
   }
 
-  public odpriObrazecGesla() {
+  public odpriObrazecGesla():void {
     this.prikaziObrazecGesla = true;
     this.uspesnoSpremenjeno = false;
     this.submitedGeslo = false;
@@ -94,7 +98,7 @@ export class UrediProfilComponent implements OnInit {
     this.jeGesloUstrezno = false;
   }
 
-  public zapriObrazecGeslo() {
+  public zapriObrazecGeslo():void {
     this.prikaziObrazecGesla = false;
     this.submitedGeslo = false;
     this.staroGesloOk = false;
@@ -129,7 +133,7 @@ export class UrediProfilComponent implements OnInit {
     }
   }
 
-  public preveriEnakostGesel() {
+  public preveriEnakostGesel():boolean {
     return this.novoGeslo == this.ponovljenoGeslo;
   }
 
@@ -161,6 +165,19 @@ export class UrediProfilComponent implements OnInit {
     }
     else {
       this.staroGesloOk = false;
+    }
+  }
+
+  OnInputEmail(event: any) {
+    // tslint:disable-next-line:max-line-length
+    const emailReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (emailReg.test(this.editUporabnik.email)) {
+      this.emailJeUstrezen = true;
+      return true;
+    }
+    else {
+      this.emailJeUstrezen = false;
+      return false;
     }
   }
 

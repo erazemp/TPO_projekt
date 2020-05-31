@@ -74,3 +74,7 @@ label, h2, h3 {
 .right-pass {
   color: aqua;
 }
+
+.wrong-string {
+  color: yellow;
+}
