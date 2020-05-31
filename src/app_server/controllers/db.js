@@ -1,9 +1,9 @@
-import {Podjetje} from "../../stockbotics/src/app/razredi/podjetje";
-
 const mongoose = require('mongoose');
 const Uporabnik = mongoose.model('Uporabnik');
 const Bot = mongoose.model('TrgovalniBot');
 const DomacaStran = require('../controllers/domaca-stran');
+const drugaBaza = require("../models/db2");
+const Podjetje = drugaBaza.model('Podjetje');
 
 var vstavi = (req, res) => {
     Uporabnik.find({}).deleteMany({})
