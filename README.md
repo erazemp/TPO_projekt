@@ -2,7 +2,7 @@
 
 ![](https://github.com/tpo-2019-2020/LP4-14/workflows/Neprekinjena%20integracija/badge.svg)  
 
-![](https://github.com/tpo-2019-2020/LP4-14/workflows/Neprekinjena%20postavitev/badge.svg)
+![](https://github.com/tpo-2019-2020/CI-CD/workflows/Neprekinjena%20postavitev/badge.svg)
 
 
 # Lastni projekt pri predmetu TPO
