@@ -28,7 +28,7 @@ var vstavi = (req, res) => {
                 "uporabniskoIme": "lavbo",
                 "ocena": "4",
                 "denar": 14,
-                "vloga": 0,
+                "vloga": 2,
                 "datumPrijave": new Date(),
                 "email": 'lavbo@gmail.com',
                 "ime": "Lavbo",
