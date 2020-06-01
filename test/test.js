@@ -1,21 +1,17 @@
+process.env.NODE_ENV = 'production';
 let mongoose = require('../src/node_modules/mongoose');
-
 let chai = require('../src/node_modules/chai');
 let chaiHttp = require('../src/node_modules/chai-http');
 let server = require('../src/app');
-let should = chai.should();
 let expect = chai.expect;
-
 let kupiDelnico = require('../src/app_server/controllers/kupiDelnico');
 let prodajDelnico = require('../src/app_server/controllers/prodajDelnico');
 let zadrziDelnico = require('../src/app_server/controllers/zadrziDelnico');
 let trgovanjeBota = require('../src/app_server/controllers/trgovanjeBota');
-
 let Bot = require('../src/app_server/models/shema-boti');
 let Uporabnik = require('../src/app_server/models/shema-uporabniki');
 
 chai.use(chaiHttp);
-
 describe('testni podatki', () => {
     describe('izbris testnih podatkov iz baze', () => {
         it('izbris', (done) => {
