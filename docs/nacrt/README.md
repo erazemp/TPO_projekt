@@ -1,11 +1,5 @@
 # Načrt sistema
 
-| | |
-|:---|:---|
-| **Naziv projekta** | Stockbotics™ |
-| **Člani projektne skupine** | Mark Bogataj, Melanija Kraljevska, Jer Pelhan, Nina Velikajne |
-| **Kraj in datum** | Ljubljana, 6. 4. 2020 |
-
 
 
 ## Povzetek
